@@ -1,6 +1,6 @@
 import { getProviders } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
-import AuthProviderButton from "@/components/AuthProviderButton";
+import AuthProviderButton from "@/components/auth/AuthProviderButton";
 import { redirect } from "next/navigation";
 import { config } from "../../../../auth";
 

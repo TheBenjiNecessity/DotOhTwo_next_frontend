@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/components/ProtectedRoute";
+import ProtectedRoute from "@/components/auth/ProtectedRoute";
 import { getServerUser } from "@/services/userApi.service";
 
 export default async function Page({ params }: { params: any }) {
