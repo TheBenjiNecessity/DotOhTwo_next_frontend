@@ -32,9 +32,11 @@ export async function request(req: NextApiRequest) {
 
     if (signedToken !== null) {
         const url = new URL(req.url || "");
+        const api =
+            req.method === "GET" ? process.env.READ_API : process.env.WRITE_API;
 
         return await callApi(
-            `http://${process.env.READ_API}${url.pathname}${url.search}`, // TODO http?s?
+            `${api}${url.pathname}${url.search}`,
             req.method,
             req.body,
             {
