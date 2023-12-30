@@ -1,19 +1,11 @@
 import { getProviders } from "next-auth/react";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
 import AuthProviderButton from "@/components/AuthProviderButton";
 import { redirect } from "next/navigation";
+import { config } from "../../../../auth";
 
 export default async function SignIn() {
-    const session = await getServerSession(authOptions);
-
-    // session: {
-    //     user: {
-    //         name: 'username',
-    //         email: 'test@test.com',
-    //         image: 'url'
-    //     }
-    // }
+    const session = await getServerSession(config);
 
     // If the user is already logged in, redirect.
     if (session) {
