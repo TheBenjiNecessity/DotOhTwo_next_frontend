@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import "../app/globals.css";
 import theme from "./theme";
 
@@ -8,37 +8,36 @@ const SIZE_CLASS = {
     large: "text-lg",
 };
 
-interface ButtonProps {
+interface ButtonProps
+    extends DetailedHTMLProps<
+            ButtonHTMLAttributes<HTMLButtonElement>,
+            HTMLButtonElement
+        >,
+        React.AriaAttributes {
     primary?: boolean;
 
     size?: "small" | "medium" | "large";
 
     variant?: "contained" | "text" | "outlined";
-
-    type?: "button" | "submit";
-
-    children: React.ReactNode;
-
-    onClick?: () => void;
 }
 
 /**
- * Primary UI component for user interaction
+ *
+ * @param primary {boolean} shows primary coloring when true, otherwise shows secondary
+ * @returns
  */
 export const Button = ({
     primary = false,
     size = "medium",
     variant = "contained",
     children,
-    ...restProps
+    ...props
 }: ButtonProps) => {
+    const { className: _, ...restProps } = props; // remove className
+
     const mode = primary ? "primary" : "secondary";
-    const variantObject = theme.button[mode][variant];
-    const variantClassNames = [
-        variantObject.color,
-        variantObject.backgroundColor,
-        variantObject.borderColor,
-    ].join(" ");
+    const { color, backgroundColor, borderColor } = theme.button[mode][variant];
+    const variantClassNames = [color, backgroundColor, borderColor].join(" ");
     const outlinedClass = variant === "outlined" ? "border" : "";
     const className = `rounded py-1 px-2 ${outlinedClass} ${variantClassNames} ${SIZE_CLASS[size]}`;
 
