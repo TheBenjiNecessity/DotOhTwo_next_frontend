@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import "../app/globals.css";
-import theme from "./theme";
+import "../../../app/globals.css";
+import theme from "../../theme";
 
 const SIZE_CLASS = {
     small: "text-sm",
