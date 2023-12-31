@@ -1,7 +1,7 @@
 import { get as localGet } from "./restapi.service";
 import { get as serverGet } from "./serverRestApi.service";
 
-export const getLocalUser = (username: string) => {
+export const getLocalUser = (username?: string) => {
     const urlString = username ? `/user?username=${username}` : "/user";
     ``;
 
@@ -11,7 +11,7 @@ export const getLocalUser = (username: string) => {
 };
 
 // TODO add "user" type
-export const getServerUser = (username: string) => {
+export const getServerUser = (username?: string) => {
     const urlString = username ? `/user?username=${username}` : "/user";
     ``;
 
