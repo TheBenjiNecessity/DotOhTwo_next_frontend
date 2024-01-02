@@ -16,31 +16,9 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
-    let user = null;
-
-    try {
-        user = await getServerUser();
-    } catch (error) {
-        console.log("error", error);
-    }
-
-    function onLoginClick() {}
-
-    function onLogoutClick() {}
-
-    function onCreateAccountClick() {}
-
     return (
         <html lang="en">
-            <body className={inter.className}>
-                <Header
-                    user={user}
-                    onLogin={onLoginClick}
-                    onLogout={onLogoutClick}
-                    onCreateAccount={onCreateAccountClick}
-                />
-                {children}
-            </body>
+            <body className={inter.className}>{children}</body>
         </html>
     );
 }
