@@ -23,7 +23,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
-export const Vertical: Story = {
+export const Main: Story = {
     render: (args) => (
         <div
             className="border border-black p-4"
@@ -36,13 +36,4 @@ export const Vertical: Story = {
             </Flexbox>
         </div>
     ),
-};
-
-export const Horizontal: Story = {
-    args: {
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-        direction: "column",
-        children: "Horizontal",
-    },
 };
