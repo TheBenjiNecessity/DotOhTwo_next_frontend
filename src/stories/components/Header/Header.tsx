@@ -1,7 +1,4 @@
 import React, { ReactNode } from "react";
-
-import { Button } from "../Button/Button";
-import "./header.css";
 import "../../../app/globals.css";
 import { Stack } from "../Stack/Stack";
 import { Flexbox } from "../Flexbox/Flexbox";
