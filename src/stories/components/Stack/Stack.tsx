@@ -5,15 +5,11 @@ import React, {
     ReactNode,
 } from "react";
 import "../../tailwind_imports.css";
+import { Flexbox, FlexboxProps } from "../Flexbox/Flexbox";
 
 const SPACING_CLASSES = {
     column: ["mt-0", "mt-1", "mt-2", "mt-3", "mt-4"],
     row: ["ml-0", "ml-1", "ml-2", "ml-3", "ml-4"],
-};
-
-const DIRECTION_CLASSES = {
-    row: "flex-row",
-    column: "flex-col",
 };
 
 interface StackProps
@@ -38,24 +34,24 @@ export const Stack = ({
     direction = "column",
     divider,
     children,
-}: StackProps) => {
+    ...restProps
+}: StackProps & FlexboxProps) => {
     const spacingClass = SPACING_CLASSES[direction][spacing];
-    const directionClass = DIRECTION_CLASSES[direction];
 
     return (
-        <div className={`flex ${directionClass}`}>
+        <Flexbox direction={direction} {...restProps}>
             {Children.map(children, (child, index) => {
                 const className = index !== 0 ? spacingClass : undefined;
 
                 return (
                     <>
                         <div className={className}>{child}</div>
-                        {index < Children.count(children) && (
+                        {divider && index < Children.count(children) && (
                             <div className={spacingClass}>{divider}</div>
                         )}
                     </>
                 );
             })}
-        </div>
+        </Flexbox>
     );
 };
