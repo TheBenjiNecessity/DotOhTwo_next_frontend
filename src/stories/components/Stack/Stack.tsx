@@ -12,10 +12,13 @@ const SPACING_CLASSES = {
     row: ["ml-0", "ml-1", "ml-2", "ml-3", "ml-4"],
 };
 
-interface StackProps
-    extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
+export interface SpacingProps {
     spacing?: 0 | 1 | 2 | 3 | 4;
+}
 
+interface StackProps
+    extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>,
+        SpacingProps {
     direction?: "row" | "column";
 
     divider?: ReactNode;
