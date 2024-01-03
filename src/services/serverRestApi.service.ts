@@ -32,7 +32,7 @@ async function request(
 
         return fetch(`${api}${urlString}`, {
             method,
-            body,
+            body: body ? JSON.stringify(body) : null,
             headers: {
                 ...headers,
                 "Content-Type": "application/json",
