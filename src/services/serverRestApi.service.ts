@@ -48,18 +48,18 @@ export const get = (url: string, headers: any = null) => {
     return request(url, "GET", headers);
 };
 
-export const post = (url: string, headers: any, body: any) => {
+export const post = (url: string, body: any, headers: any = null) => {
     return request(url, "POST", headers, body);
 };
 
-export const put = (url: string, headers: any, body: any) => {
+export const put = (url: string, body: any, headers: any = null) => {
     return request(url, "PUT", headers, body);
 };
 
-export const patch = (url: string, headers: any, body: any) => {
+export const patch = (url: string, body: any, headers: any = null) => {
     return request(url, "PATCH", headers, body);
 };
 
-export const del = (url: string, headers: any) => {
+export const del = (url: string, headers: any = null) => {
     return request(url, "DELETE", headers);
 };
