@@ -20,7 +20,7 @@ export default async function UnProtectedRoute({
 
     if (session) {
         if (redirectToUser) {
-            return redirect(`/${session.name}`);
+            return redirect(`/${session.user.name}`);
         }
 
         return redirect(redirectUrl);
