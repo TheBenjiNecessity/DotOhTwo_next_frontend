@@ -1,6 +1,8 @@
+import { User } from "@/models/user.model";
 import { get as localGet } from "./restapi.service";
-import { get as serverGet } from "./serverRestApi.service";
+import { get as serverGet, post as serverPost } from "./serverRestApi.service";
 
+// TODO why have local vs server. Ugh.
 export const getLocalUser = (username?: string) => {
     const urlString = username ? `/user?username=${username}` : "/user";
     ``;
@@ -10,12 +12,14 @@ export const getLocalUser = (username?: string) => {
     });
 };
 
-// TODO add "user" type
 export const getServerUser = (username?: string) => {
-    const urlString = username ? `/user?username=${username}` : "/user";
-    ``;
+    if (username) {
+        return serverGet(`/user?username=${username}`);
+    }
 
-    return serverGet(urlString).then(async (data: Response) => {
-        return data.json();
-    });
+    return serverGet("/user");
+};
+
+export const createServerUser = (user: User) => {
+    return serverPost("/user", user);
 };
