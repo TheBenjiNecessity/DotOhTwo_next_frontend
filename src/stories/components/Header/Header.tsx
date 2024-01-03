@@ -55,12 +55,23 @@ export const HeaderUserMessage = ({ user }: HeaderUserMessageProps) => {
 export const Header = ({ children }: HeaderProps) => (
     <header>
         <div className="border-b border-black border-solid px-2 py-1">
-            <Flexbox
-                direction="row"
-                alignItems="center"
-                justifyContent="space-between"
-            >
-                {children}
+            <Flexbox direction="row" alignItems="center">
+                <Flexbox
+                    flexShrink={1}
+                    justifyContent="flex-start"
+                    direction="row"
+                    alignItems="center"
+                >
+                    <HeaderBranding />
+                </Flexbox>
+                <Flexbox
+                    flexGrow={1}
+                    justifyContent="flex-end"
+                    direction="row"
+                    alignItems="center"
+                >
+                    {children}
+                </Flexbox>
             </Flexbox>
         </div>
     </header>
