@@ -71,11 +71,11 @@ export const Flexbox = ({
     let shrinkClass = "";
 
     if (typeof flexGrow !== "undefined") {
-        growClass = flexGrow === 0 ? "flex-grow-0" : "flex-grow-1";
+        growClass = flexGrow === 0 ? "grow-0" : "grow";
     }
 
     if (typeof flexShrink !== "undefined") {
-        shrinkClass = flexShrink === 0 ? "flex-shrink-0" : "flex-shrink-1";
+        shrinkClass = flexShrink === 0 ? "shrink-0" : "shrink";
     }
 
     const classes = [
