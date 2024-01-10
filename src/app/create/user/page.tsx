@@ -1,3 +1,4 @@
+import { SubmitButton } from "@/components/form/SubmitButton";
 import { User } from "@/models/user.model";
 import {
     createServerUser,
@@ -65,7 +66,6 @@ export default async function Page({ searchParams }: { searchParams: any }) {
 
     if (searchParams.username) {
         const data = await getServerUser(searchParams.username);
-        console.log("data", data);
         const userData = await data.json();
 
         if (userData) {
@@ -178,12 +178,9 @@ export default async function Page({ searchParams }: { searchParams: any }) {
                     </tr>
                 </tbody>
             </table>
-            <button
-                type="submit"
-                className="my-2 p-2 border border-black bg-white"
-            >
+            <SubmitButton className="my-2 p-2 border border-black bg-white">
                 Create User
-            </button>
+            </SubmitButton>
         </form>
     );
 }
