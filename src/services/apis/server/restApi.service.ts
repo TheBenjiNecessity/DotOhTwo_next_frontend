@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { config } from "../../auth";
+import { config } from "../../../../auth";
 import jwt, { Secret } from "jsonwebtoken";
 
 async function getSignedToken() {

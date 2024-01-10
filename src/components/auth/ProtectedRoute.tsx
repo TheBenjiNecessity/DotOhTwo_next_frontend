@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { config } from "../../../auth";
-import { getServerUser } from "@/services/userApi.service";
+import { getUser } from "@/services/apis/server/user.service";
 import { getRolesArray } from "@/utils/user.utils";
 import { arrayIncludesAnyFromArray } from "@/utils/array.utils";
 
@@ -20,7 +20,7 @@ export default async function ProtectedRoute({
         return redirect(redirectUrl);
     }
 
-    const data = await getServerUser(session.user.name);
+    const data = await getUser(session.user.name);
     const user = await data.json();
 
     const userRolesArray = getRolesArray(user);

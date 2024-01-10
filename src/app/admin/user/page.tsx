@@ -1,10 +1,10 @@
 import { SubmitButton } from "@/components/form/SubmitButton";
 import { User } from "@/models/user.model";
 import {
-    createServerUser,
-    getServerUser,
-    updateServerUser,
-} from "@/services/userApi.service";
+    createUser,
+    getUser,
+    updateUser,
+} from "@/services/apis/server/user.service";
 
 const InputBlock = ({
     name,
@@ -65,7 +65,7 @@ export default async function Page({ searchParams }: { searchParams: any }) {
     let isEditing = false;
 
     if (searchParams.username) {
-        const data = await getServerUser(searchParams.username);
+        const data = await getUser(searchParams.username);
         const userData = await data.json();
 
         if (userData.status === 404) {
@@ -104,8 +104,8 @@ export default async function Page({ searchParams }: { searchParams: any }) {
         };
 
         const response = isEditing
-            ? await updateServerUser(dtoUser)
-            : await createServerUser(dtoUser);
+            ? await updateUser(dtoUser)
+            : await createUser(dtoUser);
         user = await response.json();
     }
 

@@ -1,5 +1,5 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import { createServerUser, getServerUser } from "@/services/userApi.service";
+import { createUser, getUser } from "@/services/apis/server/user.service";
 import { getServerSession } from "next-auth";
 import { config } from "../../../auth";
 import { User } from "@/models/user.model";
@@ -8,7 +8,7 @@ export default async function Page({ params }: { params: any }) {
     let userNameSlug = params.slug[0];
     let user = null;
 
-    const data = await getServerUser(userNameSlug);
+    const data = await getUser(userNameSlug);
 
     if (data.status >= 200 && data.status < 300) {
         user = await data.json();
@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: any }) {
                 email: session.user.email,
             };
 
-            const createdData = await createServerUser(newUser);
+            const createdData = await createUser(newUser);
 
             if (createdData.status >= 200 && createdData.status < 300) {
                 user = await createdData.json();
