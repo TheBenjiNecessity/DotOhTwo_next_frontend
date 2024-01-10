@@ -68,7 +68,9 @@ export default async function Page({ searchParams }: { searchParams: any }) {
         const data = await getServerUser(searchParams.username);
         const userData = await data.json();
 
-        if (userData) {
+        if (userData.status === 404) {
+            throw new Error("User not found");
+        } else {
             isEditing = true;
 
             user = {
@@ -104,12 +106,13 @@ export default async function Page({ searchParams }: { searchParams: any }) {
         const response = isEditing
             ? await updateServerUser(dtoUser)
             : await createServerUser(dtoUser);
-        const daoUser = await response.json();
+        user = await response.json();
     }
 
     const userDate = user?.DOB
         ? new Date(user?.DOB).toISOString()
         : new Date().toISOString();
+
     return (
         <form className="w-full" action={create}>
             <table className="w-full">
