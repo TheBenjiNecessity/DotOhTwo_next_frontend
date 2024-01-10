@@ -179,7 +179,7 @@ export default async function Page({ searchParams }: { searchParams: any }) {
                 </tbody>
             </table>
             <SubmitButton className="my-2 p-2 border border-black bg-white">
-                Create User
+                {isEditing ? "Update User" : "Create User"}
             </SubmitButton>
         </form>
     );
