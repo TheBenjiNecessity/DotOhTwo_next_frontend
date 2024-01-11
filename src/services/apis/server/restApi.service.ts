@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { config } from "../../../../auth";
 import jwt, { Secret } from "jsonwebtoken";
 import axios from "axios";
-import { HTTPMethod } from "../httpmethod.enum";
+import { HTTPMethod } from "../httpMethod.enum";
 
 async function getSignedToken() {
     const serverSession = await getServerSession(config);
