@@ -1,5 +1,5 @@
 export type Reviewable = {
-    id: string;
+    id?: number;
     type: string;
     title: string;
     description: string;
