@@ -8,13 +8,11 @@ export default async function Page({ params }: { params: any }) {
     let userNameSlug = params.slug[0];
     let user = null;
 
-    const data = await getUser(userNameSlug);
+    try {
+        user = await getUser(userNameSlug);
+    } catch (error) {
+        console.log(error);
 
-    if (data.status >= 200 && data.status < 300) {
-        user = await data.json();
-    } else if (data.status === 404) {
-        // if we got to the user page with a username that matches the username that is logged in (the current user matches the user route)
-        // and that user does not exist in the data base since we got a 404 then create that user in the database.
         const session = await getServerSession(config);
 
         if (session.user.name === userNameSlug) {
@@ -23,11 +21,9 @@ export default async function Page({ params }: { params: any }) {
                 email: session.user.email,
             };
 
-            const createdData = await createUser(newUser);
-
-            if (createdData.status >= 200 && createdData.status < 300) {
-                user = await createdData.json();
-            } else {
+            try {
+                user = await createUser(newUser);
+            } catch (createdError) {
                 // what happens if user creation fails? (BE failure/user already exists (would not be able to get here?))
                 // what if someone tries to create and account using one auth provider but logs in using another with same email?
                 // what if a user is able to create an account with a username that already exists? Should be based on EMAIL and username.
@@ -35,8 +31,6 @@ export default async function Page({ params }: { params: any }) {
                 // could this be put into a different component?
             }
         }
-    } else {
-        // TODO retrieving user failed... go to error page? show error info?
     }
 
     return (

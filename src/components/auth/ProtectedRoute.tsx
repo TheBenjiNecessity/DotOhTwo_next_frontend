@@ -20,8 +20,7 @@ export default async function ProtectedRoute({
         return redirect(redirectUrl);
     }
 
-    const data = await getUser(session.user.name);
-    const user = await data.json();
+    const user = await getUser(session.user.name);
 
     const userRolesArray = getRolesArray(user);
     if (roles.length && !arrayIncludesAnyFromArray(userRolesArray, roles)) {

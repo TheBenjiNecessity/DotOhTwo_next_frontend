@@ -1,6 +1,8 @@
 import { getServerSession } from "next-auth";
 import { config } from "../../../../auth";
 import jwt, { Secret } from "jsonwebtoken";
+import axios from "axios";
+import { HTTPMethod } from "../httpmethod.enum";
 
 async function getSignedToken() {
     const serverSession = await getServerSession(config);
@@ -28,20 +30,30 @@ async function request(
 
     if (signedToken !== null) {
         const api =
-            method === "GET" ? process.env.READ_API : process.env.WRITE_API;
+            method === HTTPMethod.GET
+                ? process.env.READ_API
+                : process.env.WRITE_API;
 
-        return fetch(`${api}${urlString}`, {
+        const config: any = {
             method,
-            body: body ? JSON.stringify(body) : null,
+            url: urlString,
+            baseURL: api,
+            data: body,
             headers: {
                 ...headers,
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${signedToken}`,
             },
-        });
+        };
+
+        if (method === HTTPMethod.GET || method === HTTPMethod.DELETE) {
+            delete config.data;
+        }
+
+        return axios(config);
     }
 
-    return null;
+    return new Promise((resolve, reject) => reject());
 }
 
 export const get = (url: string, headers: any = null) => {

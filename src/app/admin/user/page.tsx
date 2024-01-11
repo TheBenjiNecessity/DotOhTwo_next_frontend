@@ -65,17 +65,16 @@ export default async function Page({ searchParams }: { searchParams: any }) {
     let isEditing = false;
 
     if (searchParams.username) {
-        const data = await getUser(searchParams.username);
-        const userData = await data.json();
+        try {
+            const userData = await getUser(searchParams.username);
 
-        if (userData.status === 404) {
-            throw new Error("User not found");
-        } else {
             isEditing = true;
 
             user = {
                 ...userData,
             };
+        } catch (error) {
+            console.log("Admin user get error");
         }
     }
 
@@ -103,10 +102,9 @@ export default async function Page({ searchParams }: { searchParams: any }) {
             DOB: new Date(rawFormData.dob),
         };
 
-        const response = isEditing
+        user = isEditing
             ? await updateUser(dtoUser)
             : await createUser(dtoUser);
-        user = await response.json();
     }
 
     const userDate = user?.DOB

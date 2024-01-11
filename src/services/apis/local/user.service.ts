@@ -5,7 +5,5 @@ export const getUser = (username?: string) => {
     const urlString = username ? `/user?username=${username}` : "/user";
     ``;
 
-    return get(urlString).then(async (data: Response) => {
-        return data.json();
-    });
+    return get(urlString);
 };
