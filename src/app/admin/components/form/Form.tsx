@@ -14,6 +14,7 @@ export type InputProps = {
 type FormInputProps = {
     type: string;
     isJSON?: boolean;
+    isDate?: boolean;
 };
 
 type RowProps = {
@@ -36,6 +37,10 @@ export const Form = ({ action, submitButtonText, rows, data }: FormProps) => {
                         <tr key={index}>
                             {row.inputs.map((input) => {
                                 const defaultValue = data?.[input.name];
+                                const date = new Date(defaultValue);
+                                const isValid = !isNaN(
+                                    Date.parse(defaultValue)
+                                );
 
                                 if (input.type === "input") {
                                     return (
@@ -43,7 +48,11 @@ export const Form = ({ action, submitButtonText, rows, data }: FormProps) => {
                                             key={input.name}
                                             name={input.name}
                                             label={input.label}
-                                            defaultValue={defaultValue}
+                                            defaultValue={
+                                                input.isDate && isValid
+                                                    ? date.toISOString()
+                                                    : defaultValue
+                                            }
                                             disabled={input.disabled}
                                             required={input.required}
                                             colSpan={input.colSpan}
