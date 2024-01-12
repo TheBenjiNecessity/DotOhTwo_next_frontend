@@ -5,96 +5,36 @@ import {
     getUser,
     updateUser,
 } from "@/services/apis/server/user.service";
-
-const InputBlock = ({
-    name,
-    label,
-    defaultValue = "",
-    disabled = false,
-    required = false,
-}: {
-    name: string;
-    label: string;
-    defaultValue?: string | undefined;
-    disabled?: boolean;
-    required?: boolean;
-}) => (
-    <td className="px-2 py-1">
-        <div>
-            <label htmlFor={name}>
-                {label} {required ? "*" : ""}:
-            </label>
-        </div>
-        <div>
-            <input
-                type="text"
-                name={name}
-                defaultValue={defaultValue}
-                disabled={disabled}
-            />
-        </div>
-    </td>
-);
-
-const TextareaBlock = ({
-    name,
-    label,
-    defaultValue,
-}: {
-    name: string;
-    label: string;
-    defaultValue?: string | undefined;
-}) => (
-    <td className="px-2 py-1" colSpan={2}>
-        <div>
-            <label htmlFor={name}>{label}:</label>
-        </div>
-        <div>
-            <textarea
-                name={name}
-                rows={4}
-                className="w-full"
-                defaultValue={defaultValue}
-            />
-        </div>
-    </td>
-);
+import { ROWS } from "./contants";
+import { Form } from "../components/form/Form";
+import { getString } from "../utils/form.utils";
 
 export default async function Page({ searchParams }: { searchParams: any }) {
     let user: User = { username: "", email: "" };
-    let isEditing = false;
 
     if (searchParams.username) {
-        try {
-            const userData = await getUser(searchParams.username);
+        const userData = await getUser(searchParams.username);
 
-            isEditing = true;
-
-            user = {
-                ...userData,
-            };
-        } catch (error) {
-            console.log("Admin user get error");
-        }
+        user = {
+            ...userData,
+        };
     }
 
     async function create(formData: FormData) {
         "use server";
 
-        function getString(formName: string): string {
-            return formData.get(formName)?.valueOf().toString() || "";
-        }
-
         const rawFormData = {
-            username: isEditing ? searchParams.username : getString("username"),
-            dob: getString("dob"),
-            email: getString("email"),
-            phone: getString("phone"),
-            roles: getString("roles"),
-            content: JSON.parse(getString("content") || "{}"),
-            settings: JSON.parse(getString("settings") || "{}"),
-            preferences: JSON.parse(getString("preferences") || "{}"),
-            statistics: JSON.parse(getString("statistics") || "{}"),
+            username: searchParams.username
+                ? searchParams.username
+                : getString(formData, "username"),
+            dob: getString(formData, "dob"),
+            email: getString(formData, "email"),
+            phone: getString(formData, "phone"),
+            roles: getString(formData, "roles"),
+            content: JSON.parse(getString(formData, "content") || "{}"),
+            settings: JSON.parse(getString(formData, "settings") || "{}"),
+            preferences: JSON.parse(getString(formData, "preferences") || "{}"),
+            statistics: JSON.parse(getString(formData, "statistics") || "{}"),
         };
 
         const dtoUser = {
@@ -102,86 +42,21 @@ export default async function Page({ searchParams }: { searchParams: any }) {
             DOB: new Date(rawFormData.dob),
         };
 
-        user = isEditing
-            ? await updateUser(dtoUser)
-            : await createUser(dtoUser);
+        if (searchParams.username) {
+            await updateUser(dtoUser);
+        } else {
+            await createUser(dtoUser);
+        }
     }
 
-    const userDate = user?.DOB
-        ? new Date(user?.DOB).toISOString()
-        : new Date().toISOString();
-
     return (
-        <form className="w-full" action={create}>
-            <table className="w-full">
-                <tbody>
-                    <tr>
-                        <InputBlock
-                            name="username"
-                            label="Username"
-                            defaultValue={user.username}
-                            disabled={isEditing}
-                            required
-                        />
-                        <InputBlock
-                            name="dob"
-                            label="Date of Birth"
-                            defaultValue={userDate}
-                        />
-                    </tr>
-                    <tr>
-                        <InputBlock
-                            name="email"
-                            label="Email"
-                            required
-                            defaultValue={user.email}
-                        />
-                        <InputBlock
-                            name="phone"
-                            label="Phone"
-                            defaultValue={user.phone}
-                        />
-                    </tr>
-                    <tr>
-                        <InputBlock
-                            name="roles"
-                            label="Roles"
-                            defaultValue={user.roles}
-                        />
-                    </tr>
-                    <tr>
-                        <TextareaBlock
-                            name="content"
-                            label="Content"
-                            defaultValue={JSON.stringify(user.content)}
-                        />
-                    </tr>
-                    <tr>
-                        <TextareaBlock
-                            name="settings"
-                            label="Settings"
-                            defaultValue={JSON.stringify(user.settings)}
-                        />
-                    </tr>
-                    <tr>
-                        <TextareaBlock
-                            name="preferences"
-                            label="Preferences"
-                            defaultValue={JSON.stringify(user.preferences)}
-                        />
-                    </tr>
-                    <tr>
-                        <TextareaBlock
-                            name="statistics"
-                            label="Statistics"
-                            defaultValue={JSON.stringify(user.statistics)}
-                        />
-                    </tr>
-                </tbody>
-            </table>
-            <SubmitButton className="my-2 p-2 border border-black bg-white">
-                {isEditing ? "Update User" : "Create User"}
-            </SubmitButton>
-        </form>
+        <Form
+            action={create}
+            submitButtonText={
+                searchParams.username ? "Update User" : "Create User"
+            }
+            rows={ROWS}
+            data={user}
+        />
     );
 }
