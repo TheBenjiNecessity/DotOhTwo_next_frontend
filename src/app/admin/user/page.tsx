@@ -27,7 +27,7 @@ export default async function Page({ searchParams }: { searchParams: any }) {
             username: searchParams.username
                 ? searchParams.username
                 : getString(formData, "username"),
-            dob: getString(formData, "dob"),
+            DOB: getString(formData, "DOB"),
             email: getString(formData, "email"),
             phone: getString(formData, "phone"),
             roles: getString(formData, "roles"),
@@ -39,7 +39,7 @@ export default async function Page({ searchParams }: { searchParams: any }) {
 
         const dtoUser = {
             ...rawFormData,
-            DOB: new Date(rawFormData.dob),
+            DOB: new Date(rawFormData.DOB),
         };
 
         if (searchParams.username) {

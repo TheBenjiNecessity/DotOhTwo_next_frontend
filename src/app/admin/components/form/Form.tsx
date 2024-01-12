@@ -36,11 +36,11 @@ export const Form = ({ action, submitButtonText, rows, data }: FormProps) => {
                     {rows.map((row, index) => (
                         <tr key={index}>
                             {row.inputs.map((input) => {
-                                const defaultValue = data?.[input.name];
+                                const defaultValue: any = data?.[input.name];
                                 const date = new Date(defaultValue);
-                                const isValid = !isNaN(
-                                    Date.parse(defaultValue)
-                                );
+                                const isValid =
+                                    defaultValue?.length > 0 &&
+                                    !isNaN(Date.parse(defaultValue));
 
                                 if (input.type === "input") {
                                     return (
