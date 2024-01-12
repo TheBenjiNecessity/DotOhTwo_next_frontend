@@ -1,4 +1,3 @@
-import { SubmitButton } from "@/components/form/SubmitButton";
 import {
     ReviewableDTO,
     createDTOFromReviewable,
