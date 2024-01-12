@@ -42,3 +42,20 @@ export const createDTOFromReviewable = (
 
     return reviewableDTO;
 };
+
+export const createReviewableFromDTO = (
+    reviewableDTO: ReviewableDTO
+): Reviewable => {
+    const { type, title, description, content, info, statistics } =
+        reviewableDTO;
+    const reviewable: Reviewable = {
+        type,
+        title,
+        description,
+        content,
+        info,
+        statistics,
+    };
+
+    return reviewable;
+};
