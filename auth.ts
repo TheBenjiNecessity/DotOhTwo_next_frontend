@@ -17,6 +17,10 @@ export const config = {
     ],
     callbacks: {
         async session({ session, token }) {
+            if (!session) {
+                return session;
+            }
+
             const newSession = session as any;
             newSession.token = token;
             return newSession;
