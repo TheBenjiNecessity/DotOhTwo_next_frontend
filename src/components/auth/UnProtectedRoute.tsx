@@ -18,7 +18,7 @@ export default async function UnProtectedRoute({
 }) {
     const session = await getServerSession(config);
 
-    if (session) {
+    if (session?.user?.name) {
         if (redirectToUser) {
             return redirect(`/${session.user.name}`);
         }

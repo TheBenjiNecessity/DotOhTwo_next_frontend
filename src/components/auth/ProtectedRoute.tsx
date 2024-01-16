@@ -16,7 +16,7 @@ export default async function ProtectedRoute({
 }) {
     const session = await getServerSession(config);
 
-    if (!session) {
+    if (!session?.user?.name) {
         return redirect(redirectUrl);
     }
 

@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: any }) {
 
         const session = await getServerSession(config);
 
-        if (session.user.name === userNameSlug) {
+        if (session?.user?.name && session?.user?.name === userNameSlug) {
             const newUser: User = {
                 username: session.user.name,
                 email: session.user.email,
