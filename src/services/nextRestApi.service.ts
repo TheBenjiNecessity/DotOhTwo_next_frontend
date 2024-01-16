@@ -1,8 +1,8 @@
 import jwt, { Secret } from "jsonwebtoken";
 import { getToken } from "next-auth/jwt";
-import { type NextApiRequest } from "next";
+import { NextRequest } from "next/server";
 
-async function getSignedToken(req: NextApiRequest) {
+async function getSignedToken(req: NextRequest) {
     const token = await getToken({ req, secret: process.env.AUTH_SECRET });
 
     if (token !== null) {
@@ -14,20 +14,20 @@ async function getSignedToken(req: NextApiRequest) {
     return null;
 }
 
-async function callApi(
+function callApi(
     url: string,
     method: string = "GET",
     body: any,
     headers: any
-) {
-    return await fetch(url, {
+): Promise<Response> {
+    return fetch(url, {
         method,
         body,
         headers,
     });
 }
 
-export async function request(req: NextApiRequest) {
+export async function request(req: NextRequest): Promise<Response> {
     const signedToken = await getSignedToken(req);
 
     if (signedToken !== null) {
@@ -35,7 +35,7 @@ export async function request(req: NextApiRequest) {
         const api =
             req.method === "GET" ? process.env.READ_API : process.env.WRITE_API;
 
-        return await callApi(
+        return callApi(
             `${api}${url.pathname}${url.search}`,
             req.method,
             req.body,
@@ -47,7 +47,7 @@ export async function request(req: NextApiRequest) {
         );
     }
 
-    return null;
+    return new Promise((resolve, reject) => reject());
 }
 
 // return new Response("Error", {

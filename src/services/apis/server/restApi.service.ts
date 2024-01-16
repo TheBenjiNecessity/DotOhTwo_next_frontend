@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { config } from "../../../../auth";
 import jwt, { Secret } from "jsonwebtoken";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 import { HTTPMethod } from "../httpMethod.enum";
 
 async function getSignedToken() {
@@ -25,7 +25,7 @@ async function request(
     method = "GET",
     headers = {},
     body = null
-): Promise<any> {
+): Promise<AxiosResponse<any, any>> {
     const signedToken = await getSignedToken();
 
     if (signedToken !== null) {
