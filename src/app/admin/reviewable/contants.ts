@@ -12,7 +12,7 @@ export const ROWS = [
         inputs: [
             {
                 name: FORM_NAMES.TITLE,
-                label: "Title",
+                label: "Title (For internal purposes only. Not visible to user.)",
                 disabled: false,
                 colSpan: 1,
                 required: false,
