@@ -17,6 +17,7 @@ export const InputBlock = ({
     >
         <input
             type="text"
+            id={name}
             name={name}
             defaultValue={defaultValue}
             disabled={disabled}

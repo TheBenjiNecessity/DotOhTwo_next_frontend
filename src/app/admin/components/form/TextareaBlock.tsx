@@ -16,6 +16,7 @@ export const TextareaBlock = ({
         colSpan={colSpan}
     >
         <textarea
+            id={name}
             name={name}
             rows={4}
             className="w-full"
