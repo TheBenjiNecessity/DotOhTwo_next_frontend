@@ -24,7 +24,8 @@ async function request(
     urlString: string,
     method = "GET",
     headers = {},
-    body = null
+    body = null,
+    params = null
 ): Promise<AxiosResponse<any, any>> {
     const signedToken = await getSignedToken();
 
@@ -39,6 +40,7 @@ async function request(
             url: urlString,
             baseURL: api,
             data: body,
+            params,
             headers: {
                 ...headers,
                 "Content-Type": "application/json",
@@ -53,11 +55,11 @@ async function request(
         return axios(config);
     }
 
-    return new Promise((resolve, reject) => reject());
+    return new Promise((resolve, reject) => reject()); // TODO is there a better way to do this?
 }
 
-export const get = (url: string, headers: any = null) => {
-    return request(url, "GET", headers);
+export const get = (url: string, params: any = null, headers: any = null) => {
+    return request(url, "GET", headers, null, params); // TODO shouldn't need to pass null
 };
 
 export const post = (url: string, body: any, headers: any = null) => {
