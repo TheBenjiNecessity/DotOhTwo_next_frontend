@@ -9,6 +9,14 @@ export const getUser = (username?: string): Promise<UserDTO> => {
     return get(url).then((response) => response.data);
 };
 
+export const searchUsers = (text: string): Promise<Array<UserDTO>> => {
+    return get(`/user/search`, {
+        text,
+        limit: 10, // TODO paging
+        offset: 0,
+    }).then((response) => response.data);
+};
+
 export const createUser = (user: User): Promise<UserDTO> => {
     return post("/user", user).then((response) => response.data);
 };

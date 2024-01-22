@@ -9,7 +9,6 @@ export const getReviewable = (id: number): Promise<ReviewableDTO> => {
 export const searchReviewables = (
     text: string
 ): Promise<Array<ReviewableDTO>> => {
-    console.log("searchReviewables", text);
     return get(`/reviewable/search`, {
         text,
         locale: "en", // TODO get from browser? localization?
