@@ -6,10 +6,12 @@ export default async function AuthProviderList() {
     const providers = await getProviders();
 
     return (
-        <Stack spacing={1}>
+        <>
             {Object.values(providers || []).map((provider, index) => (
-                <AuthProviderButton key={index} provider={provider} />
+                <div key={index} className={index !== 0 ? "mt-1" : undefined}>
+                    <AuthProviderButton provider={provider} />
+                </div>
             ))}
-        </Stack>
+        </>
     );
 }

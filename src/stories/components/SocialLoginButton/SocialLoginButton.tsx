@@ -38,22 +38,21 @@ export const SocialLoginButton = ({
     providerId,
     ...restProps
 }: SSOButtonProps) => {
-    const className = `${SIGN_IN_BUTTON_STYLES[providerId]} min-w-[250px] rounded-md px-2 py-1.5`;
+    const className = `${SIGN_IN_BUTTON_STYLES[providerId]} w-full rounded-md px-3 py-3`;
 
     return (
         <button className={className} {...restProps}>
-            <div className="flex flex-row items-center justify-start">
-                <div className="text-white">
-                    {SIGN_IN_BUTTON_ICON[providerId] && (
-                        <Image
-                            width={24}
-                            height={24}
-                            layout="fixed"
-                            src={SIGN_IN_BUTTON_ICON[providerId]}
-                            alt={`${providerId} logo`}
-                        />
-                    )}
-                </div>
+            <div className="flex flex-row items-center justify-start text-white">
+                {SIGN_IN_BUTTON_ICON[providerId] && (
+                    <Image
+                        width={24}
+                        height={24}
+                        layout="fixed"
+                        src={SIGN_IN_BUTTON_ICON[providerId]}
+                        alt={`${providerId} logo`}
+                    />
+                )}
+
                 <div className="ml-2">{SIGN_IN_BUTTON_TEXT[providerId]}</div>
             </div>
         </button>
