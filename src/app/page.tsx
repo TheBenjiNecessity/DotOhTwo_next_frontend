@@ -19,7 +19,7 @@ export default async function Home() {
             <main className="flex min-h-screen flex-col items-center justify-between md:p-24 h-full">
                 <div
                     id="login-card"
-                    className="flex flex-col w-full h-full md:w-[400px] md:w-[500px] bg-white rounded shadow pb-2 pt-10 px-6 md:px-16"
+                    className="flex flex-col w-full h-full md:w-[400px] md:w-[500px] bg-white text-black rounded shadow pb-2 pt-10 px-6 md:px-16"
                 >
                     <div className="text-center mb-4">
                         <Logo size="large" />
