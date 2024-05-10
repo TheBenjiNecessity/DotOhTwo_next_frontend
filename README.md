@@ -1,8 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Dot Oh Two
+
+## About
+
+Dot Oh Two is a review sharing app built around the idea that users should be able to review anything from anywhere and find reviews easily without having to jump through any hoops. This Nextjs application represents the web frontend for the website. Currently it not only allows users to signup and write reviews but also lets admin users use internal apps to test and debug functionality.
+
 ## Getting Started
 
-First, run the development server:
+1. Set up you local environment file
+   To connect to a local version of the postgres database, you will need to setup a local environment file with values such as connection strings to connect to a local database. TODO
+
+2. Run the development server:
 
 ```bash
 npm run dev
@@ -18,19 +27,33 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Run storybook
 
-## Learn More
+This project uses storybook to display UI components for debugging purposes. To run the storybook, simply run:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run storybook
+# or
+yarn storybook
+# or
+pnpm storybook
+# or
+bun storybook
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Open [http://localhost:6006](http://localhost:6006) with your browser to see storybook running.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Sections
 
-## Deploy on Vercel
+## TODO:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Pages:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   Home
+-   User
+-   Review
+-   Reviewable
+
+### SubPages (sections within multiple pages):
+
+-   Search
