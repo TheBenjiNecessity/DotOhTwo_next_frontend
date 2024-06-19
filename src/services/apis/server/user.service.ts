@@ -6,7 +6,13 @@ import { get, post, put } from "@/services/apis/server/restApi.service";
 export const getUser = (username?: string): Promise<UserDTO> => {
     const url = username ? `/user?username=${username}` : "/user";
 
-    return get(url).then((response) => response.data);
+    return get(url).then((response) => {
+        return response.data;
+    });
+};
+
+export const getLoggedInUser = (): Promise<UserDTO> => {
+    return getUser();
 };
 
 export const searchUsers = (text: string): Promise<Array<UserDTO>> => {

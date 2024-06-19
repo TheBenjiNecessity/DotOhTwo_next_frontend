@@ -1,5 +1,4 @@
-import { getServerSession } from "next-auth";
-import { config } from "../../../auth";
+import { isLoggedIn } from "@/services/auth/auth.service";
 
 export default async function ProtectedContent({
     fallback,
@@ -8,9 +7,7 @@ export default async function ProtectedContent({
     fallback: React.ReactNode;
     children: React.ReactNode;
 }) {
-    const session = await getServerSession(config);
-
-    if (!session) {
+    if (!isLoggedIn()) {
         return <>{fallback}</>;
     }
 

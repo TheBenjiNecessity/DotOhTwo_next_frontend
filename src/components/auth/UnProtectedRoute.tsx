@@ -1,6 +1,6 @@
-import { getServerSession } from "next-auth";
+import { getLoggedInUser } from "@/services/apis/server/user.service";
+import { isLoggedIn } from "@/services/auth/auth.service";
 import { redirect } from "next/navigation";
-import { config } from "../../../auth";
 
 /**
  * A route component that only shows its content if the user is signed out.
@@ -16,11 +16,11 @@ export default async function UnProtectedRoute({
     redirectUrl?: string;
     children: React.ReactNode;
 }) {
-    const session = await getServerSession(config);
-
-    if (session?.user?.name) {
+    if (isLoggedIn()) {
+        // TODO get logged in user info (cached?)
         if (redirectToUser) {
-            return redirect(`/${session.user.name}`);
+            const user = await getLoggedInUser(); // This should be cached on login
+            return redirect(`/${user.username}`);
         }
 
         return redirect(redirectUrl);

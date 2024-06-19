@@ -26,7 +26,7 @@ interface SSOButtonProps
             HTMLButtonElement
         >,
         React.AriaAttributes {
-    providerId: "github";
+    providerId: string;
 }
 
 /**

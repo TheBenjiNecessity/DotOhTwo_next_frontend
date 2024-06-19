@@ -1,24 +1,6 @@
-import { getServerSession } from "next-auth";
-import { config } from "../../../../auth";
-import jwt, { Secret } from "jsonwebtoken";
 import axios, { AxiosResponse } from "axios";
+import { cookies } from "next/headers";
 import { HTTPMethod } from "../httpMethod.enum";
-
-async function getSignedToken() {
-    const serverSession = await getServerSession(config);
-
-    if (serverSession?.token !== null) {
-        return jwt.sign(
-            serverSession.token,
-            process.env.AUTH_SECRET as Secret,
-            {
-                algorithm: "HS256",
-            }
-        );
-    }
-
-    return null;
-}
 
 async function request(
     urlString: string,
@@ -27,35 +9,33 @@ async function request(
     body = null,
     params = null
 ): Promise<AxiosResponse<any, any>> {
-    const signedToken = await getSignedToken();
+    const cookieStore = cookies();
+    const SESSION = cookieStore.get("SESSION");
 
-    if (signedToken !== null) {
-        const api =
-            method === HTTPMethod.GET
-                ? process.env.READ_API
-                : process.env.WRITE_API;
+    const api =
+        method === HTTPMethod.GET
+            ? process.env.READ_API
+            : process.env.WRITE_API;
 
-        const config: any = {
-            method,
-            url: urlString,
-            baseURL: api,
-            data: body,
-            params,
-            headers: {
-                ...headers,
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${signedToken}`,
-            },
-        };
+    const config: any = {
+        method,
+        url: urlString,
+        baseURL: api,
+        data: body,
+        params,
+        withCredentials: true,
+        headers: {
+            ...headers,
+            "Content-Type": "application/json",
+            Cookie: `SESSION=${SESSION?.value}`,
+        },
+    };
 
-        if (method === HTTPMethod.GET || method === HTTPMethod.DELETE) {
-            delete config.data;
-        }
-
-        return axios(config);
+    if (method === HTTPMethod.GET || method === HTTPMethod.DELETE) {
+        delete config.data;
     }
 
-    return new Promise((resolve, reject) => reject()); // TODO is there a better way to do this?
+    return axios(config);
 }
 
 export const get = (url: string, params: any = null, headers: any = null) => {

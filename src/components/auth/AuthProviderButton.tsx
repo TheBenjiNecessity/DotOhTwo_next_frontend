@@ -1,13 +1,18 @@
-"use client";
-
 import { SocialLoginButton } from "@/stories/components/SocialLoginButton/SocialLoginButton";
-import { signIn } from "next-auth/react";
+import Link from "next/link";
 
-export default function AuthProviderButton({ provider }: any) {
+interface AuthProviderButtonProps {
+    providerId: string;
+}
+
+export default function AuthProviderButton({
+    providerId,
+}: AuthProviderButtonProps) {
     return (
-        <SocialLoginButton
-            providerId={provider.id}
-            onClick={() => signIn(provider.id)}
-        />
+        <Link
+            href={`${process.env.AUTH_PROVIDER_URL}/oauth2/authorization/${providerId}`}
+        >
+            <SocialLoginButton providerId={providerId} />
+        </Link>
     );
 }

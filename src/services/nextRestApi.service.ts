@@ -1,18 +1,5 @@
-import jwt, { Secret } from "jsonwebtoken";
-import { getToken } from "next-auth/jwt";
 import { NextRequest } from "next/server";
-
-async function getSignedToken(req: NextRequest) {
-    const token = await getToken({ req, secret: process.env.AUTH_SECRET });
-
-    if (token !== null) {
-        return jwt.sign(token, process.env.AUTH_SECRET as Secret, {
-            algorithm: "HS256",
-        });
-    }
-
-    return null;
-}
+import { cookies } from "next/headers";
 
 function callApi(
     url: string,
@@ -28,26 +15,17 @@ function callApi(
 }
 
 export async function request(req: NextRequest): Promise<Response> {
-    const signedToken = await getSignedToken(req);
+    const url = new URL(req.url || "");
+    const api =
+        req.method === "GET" ? process.env.READ_API : process.env.WRITE_API;
+    const cookieStore = cookies();
+    const SESSION = cookieStore.get("SESSION");
 
-    if (signedToken !== null) {
-        const url = new URL(req.url || "");
-        const api =
-            req.method === "GET" ? process.env.READ_API : process.env.WRITE_API;
-
-        return callApi(
-            `${api}${url.pathname}${url.search}`,
-            req.method,
-            req.body,
-            {
-                ...req.headers,
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${signedToken}`,
-            }
-        );
-    }
-
-    return new Promise((resolve, reject) => reject());
+    return callApi(`${api}${url.pathname}${url.search}`, req.method, req.body, {
+        ...req.headers,
+        "Content-Type": "application/json",
+        Cookie: `SESSION=${SESSION?.value}`,
+    });
 }
 
 // return new Response("Error", {
