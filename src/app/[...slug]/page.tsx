@@ -1,37 +1,9 @@
 import ProtectedRoute from "@/components/auth/ProtectedRoute";
-import { createUser, getUser } from "@/services/apis/server/user.service";
-import { getServerSession } from "next-auth";
-import { config } from "../../../auth";
-import { User } from "@/models/user.model";
+import { getUser } from "@/services/apis/server/user.service";
 
 export default async function Page({ params }: { params: any }) {
     let userNameSlug = params.slug[0];
-    let user = null;
-
-    try {
-        user = await getUser(userNameSlug);
-    } catch (error) {
-        console.log(error);
-
-        const session = await getServerSession(config);
-
-        if (session?.user?.name && session?.user?.name === userNameSlug) {
-            const newUser: User = {
-                username: session.user.name,
-                email: session.user.email,
-            };
-
-            try {
-                user = await createUser(newUser);
-            } catch (createdError) {
-                // what happens if user creation fails? (BE failure/user already exists (would not be able to get here?))
-                // what if someone tries to create and account using one auth provider but logs in using another with same email?
-                // what if a user is able to create an account with a username that already exists? Should be based on EMAIL and username.
-                // show error page?
-                // could this be put into a different component?
-            }
-        }
-    }
+    const user: any = await getUser(userNameSlug);
 
     return (
         <ProtectedRoute>
