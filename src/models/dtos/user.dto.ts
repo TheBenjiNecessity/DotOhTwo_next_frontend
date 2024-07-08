@@ -5,6 +5,7 @@ export type UserDTO = {
     phone?: string;
     DOB?: Date;
     roles?: string;
+    isComplete: boolean;
     content?: any;
     settings?: any;
     preferences?: any;
