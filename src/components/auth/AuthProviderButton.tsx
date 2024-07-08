@@ -8,10 +8,9 @@ interface AuthProviderButtonProps {
 export default function AuthProviderButton({
     providerId,
 }: AuthProviderButtonProps) {
+    const href = `${process.env.AUTH_PROVIDER_URL}/oauth2/authorization/${providerId}`;
     return (
-        <Link
-            href={`${process.env.AUTH_PROVIDER_URL}/oauth2/authorization/${providerId}`}
-        >
+        <Link href={href}>
             <SocialLoginButton providerId={providerId} />
         </Link>
     );
