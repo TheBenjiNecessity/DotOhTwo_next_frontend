@@ -8,21 +8,27 @@ import { UserDTO } from "@/models/dtos/user.dto";
 export default async function ProtectedRoute({
     redirectUrl = "/",
     roles = [],
+    shouldCompleteProfile = true,
     children,
 }: {
     redirectUrl?: string;
     roles?: Array<string>;
+    shouldCompleteProfile?: boolean;
     children: React.ReactNode;
 }) {
     if (!isLoggedIn()) {
         return redirect(redirectUrl);
     }
 
+    const user: UserDTO = await getLoggedInUser();
+    if (!user.isComplete && shouldCompleteProfile) {
+        return redirect("/complete-profile"); // TODO: put url in external config
+    }
+
     if (!roles.length) {
         return <>{children}</>;
     }
 
-    const user: UserDTO = await getLoggedInUser();
     const userRolesArray = getRolesArray(user);
     if (!arrayIncludesAnyFromArray(userRolesArray, roles)) {
         return redirect(redirectUrl);
