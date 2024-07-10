@@ -14,8 +14,6 @@ import Input from "../Input/Input";
 const Component = (props: any) => {
     const form = useForm();
 
-    console.log("form", form);
-
     return (
         <Form {...form}>
             <FormField

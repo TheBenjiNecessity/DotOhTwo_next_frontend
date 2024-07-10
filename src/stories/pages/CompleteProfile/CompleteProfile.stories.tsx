@@ -6,8 +6,6 @@ import { useForm } from "react-hook-form";
 const Component = (props: any) => {
     const form = useForm();
 
-    console.log("CompleteProfile form", form);
-
     return <CompleteProfile form={form} />;
 };
 
