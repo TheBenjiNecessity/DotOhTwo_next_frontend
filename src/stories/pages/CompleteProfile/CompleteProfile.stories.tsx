@@ -6,15 +6,15 @@ import { useForm } from "react-hook-form";
 const Component = (props: any) => {
     const form = useForm();
 
-    return <CompleteProfile form={form} />;
+    return <CompleteProfile form={form} {...props} />;
 };
 
 const meta = {
-    title: "Example/CompleteProfile",
+    title: "Pages/CompleteProfile",
     component: Component,
     parameters: {
         // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
-        layout: "fullscreen",
+        layout: "centered",
     },
 } satisfies Meta<typeof Component>;
 
