@@ -3,6 +3,7 @@ import "../../../app/globals.css";
 import { Header } from "./Header";
 import { Body } from "./Body";
 import { Footer } from "./Footer";
+import { Actions } from "./Actions";
 
 export enum CARD_WIDTH {
     FULL = "full",
@@ -52,5 +53,6 @@ const Card = ({
 Card.Header = Header;
 Card.Body = Body;
 Card.Footer = Footer;
+Card.Actions = Actions;
 
 export default Card;
