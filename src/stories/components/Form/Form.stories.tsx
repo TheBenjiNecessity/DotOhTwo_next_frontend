@@ -14,24 +14,28 @@ import Input from "../Input/Input";
 const Component = (props: any) => {
     const form = useForm();
 
+    const onSubmit = (formData: any) => {};
+
     return (
         <Form {...form}>
-            <FormField
-                control={form.control}
-                name="example"
-                render={() => (
-                    <FormItem>
-                        <FormLabel>Form Label</FormLabel>
-                        <FormControl>
-                            <Input placeholder="FormControl" />
-                        </FormControl>
-                        <FormDescription>
-                            This is an form description
-                        </FormDescription>
-                        <FormMessage>This is an form message</FormMessage>
-                    </FormItem>
-                )}
-            />
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <FormField
+                    control={form.control}
+                    name="example"
+                    render={() => (
+                        <FormItem>
+                            <FormLabel>Form Label</FormLabel>
+                            <FormControl>
+                                <Input placeholder="FormControl" />
+                            </FormControl>
+                            <FormDescription>
+                                This is an form description
+                            </FormDescription>
+                            <FormMessage>This is an form message</FormMessage>
+                        </FormItem>
+                    )}
+                />
+            </form>
         </Form>
     );
 };
