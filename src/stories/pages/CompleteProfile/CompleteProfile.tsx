@@ -10,55 +10,66 @@ import React from "react";
 import Input from "../../components/Input/Input";
 import { FieldValues, UseFormReturn } from "react-hook-form";
 import { Button } from "../../components/Button/Button";
+import { CARD_ACTIONS_ALIGN } from "../../components/Card/Actions";
 
 interface CompleteProfileProps {
     form: UseFormReturn<FieldValues, any, undefined>;
+    onSubmit: (formData: any) => void;
 }
 
-export const CompleteProfile = ({ form }: CompleteProfileProps) => {
+export const CompleteProfile = ({ form, onSubmit }: CompleteProfileProps) => {
     return (
         <section className="flex justify-center items-center w-full h-full">
             <Card width={CARD_WIDTH.MEDIUM}>
-                <Card.Header centered>Complete Profile</Card.Header>
-                <Card.Body>
                 <Form {...form}>
-                    <FormField
-                        control={form.control}
-                        name="username"
-                        render={() => (
-                            <FormItem>
-                                    <FormLabel htmlFor="name">
-                                        User name
-                                    </FormLabel>
-                                <FormControl>
-                                    <Input placeholder="User Name" />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
+                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                        <Card.Header centered>Complete Profile</Card.Header>
+                        <Card.Body>
+                            <FormField
+                                control={form.control}
+                                name="username"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="username">
+                                            User name
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="User Name"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
 
-                    <FormField
-                        control={form.control}
-                        name="email"
-                        render={() => (
-                            <FormItem>
-                                <FormLabel htmlFor="name">Email</FormLabel>
-                                <FormControl>
-                                    <Input placeholder="Email" />
-                                </FormControl>
-                            </FormItem>
-                        )}
-                    />
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel htmlFor="email">
+                                            Email
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                placeholder="Email"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                    </FormItem>
+                                )}
+                            />
+                        </Card.Body>
+                        <Card.Footer>
+                            <Card.Actions align={CARD_ACTIONS_ALIGN.RIGHT}>
+                                <Button type="submit" primary>
+                                    Submit
+                                </Button>
+                            </Card.Actions>
+                        </Card.Footer>
+                    </form>
                 </Form>
-                </Card.Body>
-                <Card.Footer>
-                    <div className="flex justify-center items-center w-full">
-                        <div className="flex-grow"></div>
-                        <div className="flex-shrink">
-                            <Button primary>Submit</Button>
-                        </div>
-                    </div>
-                </Card.Footer>
             </Card>
         </section>
     );

@@ -6,7 +6,11 @@ import { useForm } from "react-hook-form";
 const Component = (props: any) => {
     const form = useForm();
 
-    return <CompleteProfile form={form} {...props} />;
+    const onSubmit = (formData: any) => {
+        console.log(formData);
+    };
+
+    return <CompleteProfile form={form} onSubmit={onSubmit} {...props} />;
 };
 
 const meta = {
