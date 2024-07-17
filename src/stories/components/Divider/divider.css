@@ -1,0 +1,7 @@
+.divider-horizontal {
+    border-width: thin 0px 0px 0px;
+}
+
+.divider-vertical {
+    border-width: 0px thin 0px 0px;
+}

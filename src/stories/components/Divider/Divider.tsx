@@ -1,13 +1,15 @@
 import * as React from "react";
+import "./divider.css";
 
 export interface DividerProps {
     orientation?: "horizontal" | "vertical";
 }
 
 const Divider: React.FC<DividerProps> = ({ orientation = "horizontal" }) => {
-    const orientationClass = orientation === "horizontal" ? "h-full" : "w-full";
-
-    return <hr className={orientationClass} />;
+    const sizeClass = orientation === "horizontal" ? "w-auto" : "h-auto";
+    return (
+        <hr className={`self-stretch divider-${orientation} ${sizeClass}`} />
+    );
 };
 
 export default Divider;
