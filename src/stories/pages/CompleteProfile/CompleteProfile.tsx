@@ -11,6 +11,7 @@ import Input from "../../components/Input/Input";
 import { FieldValues, UseFormReturn } from "react-hook-form";
 import { Button } from "../../components/Button/Button";
 import { CARD_ACTIONS_ALIGN } from "../../components/Card/Actions";
+import { Typography } from "../../components/Typography/Typography";
 
 interface CompleteProfileProps {
     form: UseFormReturn<FieldValues, any, undefined>;
@@ -23,7 +24,11 @@ export const CompleteProfile = ({ form, onSubmit }: CompleteProfileProps) => {
             <Card width={CARD_WIDTH.MEDIUM}>
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)}>
-                        <Card.Header centered>Complete Profile</Card.Header>
+                        <Card.Header centered>
+                            <Typography variant="h3">
+                                Complete Profile
+                            </Typography>
+                        </Card.Header>
                         <Card.Body>
                             <FormField
                                 control={form.control}
