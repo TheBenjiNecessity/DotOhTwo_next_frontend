@@ -12,6 +12,7 @@ import {
 } from "react-hook-form";
 
 import Label, { LabelProps } from "../Label/Label";
+import { Typography } from "../Typography/Typography";
 
 const Form = FormProvider;
 
@@ -78,28 +79,27 @@ const FormItem = React.forwardRef<
 
     return (
         <FormItemContext.Provider value={{ id }}>
-            <div ref={ref} className={`space-y-2 ${className}`} {...props} />
+            <div ref={ref} className={`mb-2 ${className}`} {...props} />
         </FormItemContext.Provider>
     );
 });
 FormItem.displayName = "FormItem";
 
 const FormLabel = React.forwardRef<HTMLLabelElement, LabelProps>(
-    ({ className, ...props }, ref) => {
+    ({ className, children, ...props }, ref) => {
         const { error, formItemId } = useFormField();
-        const newClassName = [className];
+        const newClassName = [`ml-2 ${className}`];
 
         if (error) {
             newClassName.push("text-destructive");
         }
 
         return (
-            <Label
-                ref={ref}
-                className={newClassName.join(" ")}
-                htmlFor={formItemId}
-                {...props}
-            />
+            <Label ref={ref} htmlFor={formItemId} {...props}>
+                <Typography variant="body2" className={newClassName.join(" ")}>
+                    {children}
+                </Typography>
+            </Label>
         );
     }
 );
@@ -135,10 +135,11 @@ const FormDescription = React.forwardRef<
     const { formDescriptionId } = useFormField();
 
     return (
-        <p
+        <Typography
+            variant="caption"
             ref={ref}
             id={formDescriptionId}
-            className={`text-sm text-muted-foreground ${className}`}
+            className={`ml-2 mt-1 text-muted-foreground ${className}`}
             {...props}
         />
     );
@@ -157,14 +158,15 @@ const FormMessage = React.forwardRef<
     }
 
     return (
-        <p
+        <Typography
+            variant="caption"
             ref={ref}
             id={formMessageId}
-            className={`text-sm font-medium text-destructive ${className}`}
+            className={`ml-2 text-destructive ${className}`}
             {...props}
         >
             {body}
-        </p>
+        </Typography>
     );
 });
 FormMessage.displayName = "FormMessage";
