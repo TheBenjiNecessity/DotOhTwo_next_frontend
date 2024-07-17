@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import "../../../app/globals.css";
 import theme from "../../theme";
+import { Typography } from "../Typography/Typography";
 
 const SIZE_CLASS = {
     small: "text-sm",
@@ -43,7 +44,7 @@ export const Button = ({
 
     return (
         <button className={className} {...restProps}>
-            {children}
+            <Typography variant="body1">{children}</Typography>
         </button>
     );
 };
