@@ -35,6 +35,20 @@ const theme = {
             },
         },
     },
+    typography: {
+        h1: "m-0 text-4xl font-bold",
+        h2: "m-0 text-3xl font-bold",
+        h3: "m-0 text-2xl font-bold",
+        h4: "m-0 text-xl font-bold",
+        h5: "m-0 text-lg font-bold",
+        h6: "m-0 text-base font-bold",
+        subtitle1: "m-0 text-base",
+        subtitle2: "m-0 text-sm",
+        body1: "m-0 text-base",
+        body2: "m-0 text-sm",
+        caption: "m-0 text-xs",
+        overline: "m-0 text-xs",
+    },
 };
 
 export default theme;
