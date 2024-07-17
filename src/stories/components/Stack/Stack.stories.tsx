@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { Stack } from "./Stack";
 import "../../tailwind_imports.css";
+import Divider from "../Divider/Divider";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -45,7 +46,11 @@ export const Horizontal: Story = {
 
 export const Divder: Story = {
     render: (args) => (
-        <Stack direction="row" divider={<hr />} {...args}>
+        <Stack
+            direction="row"
+            divider={<Divider orientation="vertical" />}
+            {...args}
+        >
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>

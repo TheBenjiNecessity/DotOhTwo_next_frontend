@@ -8,8 +8,8 @@ import "../../tailwind_imports.css";
 import { Flexbox, FlexboxProps } from "../Flexbox/Flexbox";
 
 const SPACING_CLASSES = {
-    column: ["mt-0", "mt-1", "mt-2", "mt-3", "mt-4"],
-    row: ["ml-0", "ml-1", "ml-2", "ml-3", "ml-4"],
+    column: ["space-y-0", "space-y-1", "space-y-2", "space-y-3", "space-y-4"],
+    row: ["space-x-0", "space-x-1", "space-x-2", "space-x-3", "space-x-4"],
 };
 
 export interface SpacingProps {
@@ -20,7 +20,6 @@ interface StackProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>,
         SpacingProps {
     direction?: "row" | "column";
-
     divider?: ReactNode;
 }
 
@@ -42,16 +41,15 @@ export const Stack = ({
     const spacingClass = SPACING_CLASSES[direction][spacing];
 
     return (
-        <Flexbox direction={direction} {...restProps}>
+        <Flexbox direction={direction} className={spacingClass} {...restProps}>
             {Children.map(children, (child, index) => {
-                const className = index !== 0 ? spacingClass : undefined;
+                const shouldShowDivider =
+                    divider && index + 1 < Children.count(children);
 
                 return (
                     <>
-                        <div className={className}>{child}</div>
-                        {divider && index < Children.count(children) && (
-                            <div className={spacingClass}>{divider}</div>
-                        )}
+                        {child}
+                        {shouldShowDivider && divider}
                     </>
                 );
             })}
