@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Vertical: Story = {
     render: (args) => (
-        <Stack {...args}>
+        <Stack spacing={4} {...args}>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
@@ -36,7 +36,7 @@ export const Vertical: Story = {
 
 export const Horizontal: Story = {
     render: (args) => (
-        <Stack direction="row" {...args}>
+        <Stack direction="row" spacing={4} {...args}>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
@@ -44,13 +44,24 @@ export const Horizontal: Story = {
     ),
 };
 
-export const Divder: Story = {
+export const DividerVertical: Story = {
     render: (args) => (
         <Stack
             direction="row"
+            spacing={4}
             divider={<Divider orientation="vertical" />}
             {...args}
         >
+            <div className="border border-black">test</div>
+            <div className="border border-black">test</div>
+            <div className="border border-black">test</div>
+        </Stack>
+    ),
+};
+
+export const DividerHorizontal: Story = {
+    render: (args) => (
+        <Stack spacing={4} divider={<Divider />} {...args}>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
             <div className="border border-black">test</div>
