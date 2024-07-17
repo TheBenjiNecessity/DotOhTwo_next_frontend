@@ -60,6 +60,7 @@ export const Flexbox = ({
     flexShrink,
     fullWidth = false,
     fullHeight = false,
+    className,
     children,
 }: FlexboxProps) => {
     const justifyClass = JUSTIFY_CLASSES[justifyContent];
@@ -87,6 +88,7 @@ export const Flexbox = ({
         heightClass,
         growClass,
         shrinkClass,
+        className,
     ]
         .join(" ")
         .trim();
