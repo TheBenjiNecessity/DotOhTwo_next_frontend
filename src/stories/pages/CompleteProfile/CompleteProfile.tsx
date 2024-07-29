@@ -8,22 +8,38 @@ import {
 import Card, { CARD_WIDTH } from "../../components/Card/Card";
 import React from "react";
 import Input from "../../components/Input/Input";
-import { FieldValues, UseFormReturn } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { Button } from "../../components/Button/Button";
 import { CARD_ACTIONS_ALIGN } from "../../components/Card/Actions";
 import { Typography } from "../../components/Typography/Typography";
+import { useFormState } from "react-dom";
 
-interface CompleteProfileProps {
-    form: UseFormReturn<FieldValues, any, undefined>;
-    onSubmit: (formData: any) => void;
+export interface CompleteProfileFormValues {
+    username: string;
+    email: string;
 }
 
-export const CompleteProfile = ({ form, onSubmit }: CompleteProfileProps) => {
+interface CompleteProfileProps {
+    form: UseFormReturn<CompleteProfileFormValues, any, undefined>;
+    formAction: (
+        prevState: CompleteProfileFormValues,
+        formData: FormData
+    ) => any;
+    initialState: CompleteProfileFormValues;
+}
+
+export const CompleteProfile = ({
+    form,
+    formAction,
+    initialState,
+}: CompleteProfileProps) => {
+    const [state, action] = useFormState(formAction, initialState);
+
     return (
-        <section className="flex justify-center items-center w-full h-full">
+        <main className="flex justify-center items-center w-full h-full">
             <Card width={CARD_WIDTH.MEDIUM}>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
+                    <form action={action}>
                         <Card.Header centered>
                             <Typography variant="h3">
                                 Complete Profile
@@ -47,7 +63,6 @@ export const CompleteProfile = ({ form, onSubmit }: CompleteProfileProps) => {
                                     </FormItem>
                                 )}
                             />
-
                             <FormField
                                 control={form.control}
                                 name="email"
@@ -76,6 +91,6 @@ export const CompleteProfile = ({ form, onSubmit }: CompleteProfileProps) => {
                     </form>
                 </Form>
             </Card>
-        </section>
+        </main>
     );
 };
