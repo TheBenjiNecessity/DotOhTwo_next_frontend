@@ -40,7 +40,16 @@ export const Button = ({
     const { color, backgroundColor, borderColor } = theme.button[mode][variant];
     const variantClassNames = [color, backgroundColor, borderColor].join(" ");
     const outlinedClass = variant === "outlined" ? "border" : "";
-    const className = `rounded py-1 px-2 ${outlinedClass} ${variantClassNames} ${SIZE_CLASS[size]}`;
+    const className = [
+        "rounded",
+        "py-1",
+        "px-2",
+        outlinedClass,
+        variantClassNames,
+        SIZE_CLASS[size],
+        theme.button[mode][variant].hover,
+        theme.button[mode][variant].active,
+    ].join(" ");
 
     return (
         <button className={className} {...restProps}>
