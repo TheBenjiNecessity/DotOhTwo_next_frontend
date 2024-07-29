@@ -3,14 +3,16 @@ import { within, userEvent, expect } from "@storybook/test";
 import { CompleteProfile } from "./CompleteProfile";
 import { useForm } from "react-hook-form";
 
+async function onFormAction(prevState: any, formData: FormData) {
+    return {
+        errors: null,
+    };
+}
+
 const Component = (props: any) => {
     const form = useForm();
 
-    const onSubmit = (formData: any) => {
-        console.log(formData);
-    };
-
-    return <CompleteProfile form={form} onSubmit={onSubmit} {...props} />;
+    return <CompleteProfile form={form} formAction={onFormAction} {...props} />;
 };
 
 const meta = {
