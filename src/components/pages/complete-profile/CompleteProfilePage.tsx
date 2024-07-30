@@ -7,22 +7,27 @@ import {
     CompleteProfileFormValues,
 } from "@/stories/pages/CompleteProfile/CompleteProfile";
 import { onFormAction } from "./formAction";
+import { User } from "@/models/user.model";
 
 const initialState = {
-    username: "user",
+    username: "",
     email: "",
 };
 
-const CompleteProfilePage = () => {
+const CompleteProfilePage = ({ user }: { user: User }) => {
+    const defaultValues = {
+        username: user.username,
+        email: "",
+    };
     const form = useForm<CompleteProfileFormValues>({
-        defaultValues: initialState,
+        defaultValues,
     });
 
     return (
         <CompleteProfile
             form={form}
             formAction={onFormAction}
-            initialState={initialState}
+            initialState={defaultValues}
         />
     );
 };
