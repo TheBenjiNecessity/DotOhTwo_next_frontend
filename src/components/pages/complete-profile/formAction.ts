@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { CompleteProfileFormValues } from "@/stories/pages/CompleteProfile/CompleteProfile";
+import { completeProfile } from "@/services/apis/server/user.service";
 
 const schema = z.object({
     username: z.string().min(3, { message: "Username is too short" }),
@@ -26,6 +27,10 @@ export async function onFormAction(
     }
 
     // TODO - send the data to the server
+
+    const user = await completeProfile({
+        email: formData.get("email")?.toString() || "",
+    });
 
     return {
         errors: null,
