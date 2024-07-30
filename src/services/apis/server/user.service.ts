@@ -1,5 +1,5 @@
 import { UserDTO } from "@/models/dtos/user.dto"; // TODO: UserDAO
-import { User } from "@/models/user.model";
+import { CompleteProfile, User } from "@/models/user.model";
 import { get, post, put } from "@/services/apis/server/restApi.service";
 
 // this should include a function that returns a user dto
@@ -29,4 +29,12 @@ export const createUser = (user: User): Promise<UserDTO> => {
 
 export const updateUser = (user: User): Promise<UserDTO> => {
     return put("/user", user).then((response) => response.data);
+};
+
+export const completeProfile = (
+    completeProfile: CompleteProfile
+): Promise<UserDTO> => {
+    return put("/user/complete-profile", completeProfile).then(
+        (response) => response.data
+    );
 };

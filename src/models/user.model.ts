@@ -10,3 +10,7 @@ export type User = {
     preferences?: any;
     statistics?: any;
 };
+
+export type CompleteProfile = {
+    email: string;
+};
