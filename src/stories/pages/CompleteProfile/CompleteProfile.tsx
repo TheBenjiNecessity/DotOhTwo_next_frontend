@@ -56,6 +56,7 @@ export const CompleteProfile = ({
                                         </FormLabel>
                                         <FormControl>
                                             <Input
+                                                readOnly
                                                 placeholder="User Name"
                                                 {...field}
                                             />
