@@ -1,6 +1,9 @@
 import AuthProviderList from "@/components/auth/AuthProviderList";
+import LoggedInArea from "@/components/auth/LoggedInArea";
+import NotLoggedInArea from "@/components/auth/NotLoggedInArea";
 import UnProtectedRoute from "@/components/auth/UnProtectedRoute";
 import { Logo } from "@/stories/components/Logo/Logo";
+import { LoginPage } from "@/stories/pages/Login/Login";
 
 export default async function Home() {
     /**
@@ -15,22 +18,13 @@ export default async function Home() {
      */
 
     return (
-        <UnProtectedRoute>
-            <main className="flex min-h-screen flex-col items-center justify-between md:p-24 h-full">
-                <div
-                    id="login-card"
-                    className="flex flex-col w-full h-full md:w-[400px] md:w-[500px] bg-white text-black rounded shadow pb-2 pt-10 px-6 md:px-16"
-                >
-                    <div className="text-center mb-4">
-                        <Logo size="large" />
-                    </div>
-                    <h1 className="w-full text-lg mb-4 pl-2">
-                        Sign in with your social account
-                    </h1>
-
+        <>
+            <LoggedInArea>user</LoggedInArea>
+            <NotLoggedInArea>
+                <LoginPage>
                     <AuthProviderList />
-                </div>
-            </main>
-        </UnProtectedRoute>
+                </LoginPage>
+            </NotLoggedInArea>
+        </>
     );
 }
