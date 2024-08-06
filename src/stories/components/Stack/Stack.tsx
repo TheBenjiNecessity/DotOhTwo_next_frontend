@@ -21,6 +21,7 @@ interface StackProps
         SpacingProps {
     direction?: "row" | "column";
     divider?: ReactNode;
+    fullWidth?: boolean;
 }
 
 /**
@@ -34,14 +35,23 @@ interface StackProps
 export const Stack = ({
     spacing = 0,
     direction = "column",
+    fullWidth = false,
     divider,
     children,
     ...restProps
 }: StackProps & FlexboxProps) => {
-    const spacingClass = SPACING_CLASSES[direction][spacing];
+    const spacingClass = [SPACING_CLASSES[direction][spacing]];
+
+    if (fullWidth) {
+        spacingClass.push("w-full");
+    }
 
     return (
-        <Flexbox direction={direction} className={spacingClass} {...restProps}>
+        <Flexbox
+            direction={direction}
+            className={spacingClass.join(" ")}
+            {...restProps}
+        >
             {Children.map(children, (child, index) => {
                 const shouldShowDivider =
                     divider && index + 1 < Children.count(children);
