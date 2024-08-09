@@ -2,13 +2,13 @@ import axios, { AxiosResponse } from "axios";
 import { cookies } from "next/headers";
 import { HTTPMethod } from "../httpMethod.enum";
 
-async function request(
+async function request<Type>(
     urlString: string,
     method = "GET",
     headers = {},
     body = null,
     params = null
-): Promise<AxiosResponse<any, any>> {
+): Promise<AxiosResponse<Type, any>> {
     const cookieStore = cookies();
     const SESSION = cookieStore.get("SESSION");
 
@@ -35,25 +35,44 @@ async function request(
         delete config.data;
     }
 
-    return axios(config);
+    return axios<Type>(config);
 }
 
-export const get = (url: string, params: any = null, headers: any = null) => {
-    return request(url, "GET", headers, null, params); // TODO shouldn't need to pass null
-};
+export function get<Type>(
+    url: string,
+    params: any = null,
+    headers: any = null
+): Promise<AxiosResponse<Type, any>> {
+    return request<Type>(url, "GET", headers, null, params);
+}
 
-export const post = (url: string, body: any, headers: any = null) => {
-    return request(url, "POST", headers, body);
-};
+export function post<Type>(
+    url: string,
+    body: any,
+    headers: any = null
+): Promise<AxiosResponse<Type, any>> {
+    return request<Type>(url, "POST", headers, body);
+}
 
-export const put = (url: string, body: any, headers: any = null) => {
-    return request(url, "PUT", headers, body);
-};
+export function put<Type>(
+    url: string,
+    body: any,
+    headers: any = null
+): Promise<AxiosResponse<Type, any>> {
+    return request<Type>(url, "PUT", headers, body);
+}
 
-export const patch = (url: string, body: any, headers: any = null) => {
-    return request(url, "PATCH", headers, body);
-};
+export function patch<Type>(
+    url: string,
+    body: any,
+    headers: any = null
+): Promise<AxiosResponse<Type, any>> {
+    return request<Type>(url, "PATCH", headers, body);
+}
 
-export const del = (url: string, headers: any = null) => {
-    return request(url, "DELETE", headers);
-};
+export function del<Type>(
+    url: string,
+    headers: any = null
+): Promise<AxiosResponse<Type, any>> {
+    return request<Type>(url, "DELETE", headers);
+}
