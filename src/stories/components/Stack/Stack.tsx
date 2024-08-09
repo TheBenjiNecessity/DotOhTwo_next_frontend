@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import "../../tailwind_imports.css";
 import { Flexbox, FlexboxProps } from "../Flexbox/Flexbox";
+import { Expander } from "./Expander";
 
 const SPACING_CLASSES = {
     column: ["space-y-0", "space-y-1", "space-y-2", "space-y-3", "space-y-4"],
@@ -32,7 +33,7 @@ interface StackProps
  * @param children {node} array of elements to be spaced apart
  * @returns
  */
-export const Stack = ({
+const Stack = ({
     spacing = 0,
     direction = "column",
     fullWidth = false,
@@ -66,3 +67,7 @@ export const Stack = ({
         </Flexbox>
     );
 };
+
+Stack.Expander = Expander;
+
+export default Stack;

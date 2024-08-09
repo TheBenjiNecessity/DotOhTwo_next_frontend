@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { Stack } from "./Stack";
+import Stack from "./Stack";
 import "../../tailwind_imports.css";
 import Divider from "../Divider/Divider";
 
