@@ -1,5 +1,8 @@
-import React from "react";
+import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 
-export const Expander = () => {
-    return <div className="flex-grow"></div>;
+interface ExpanderProps
+    extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {}
+
+export const Expander = ({ children }: ExpanderProps) => {
+    return <div className="flex-grow">{children}</div>;
 };
