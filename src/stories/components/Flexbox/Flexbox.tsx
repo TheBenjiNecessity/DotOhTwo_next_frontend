@@ -36,6 +36,7 @@ export interface FlexboxProps
     alignItems?: "stretch" | "flex-start" | "flex-end" | "center" | "baseline";
     fullWidth?: boolean;
     fullHeight?: boolean;
+    inline?: boolean;
     flexGrow?: 0 | 1 | undefined;
     flexShrink?: 0 | 1 | undefined;
 }
@@ -60,6 +61,7 @@ export const Flexbox = ({
     flexShrink,
     fullWidth = false,
     fullHeight = false,
+    inline = false,
     className,
     children,
 }: FlexboxProps) => {
@@ -80,7 +82,7 @@ export const Flexbox = ({
     }
 
     const classes = [
-        "flex",
+        inline ? "inline-flex" : "flex",
         directionClass,
         justifyClass,
         alignClass,
