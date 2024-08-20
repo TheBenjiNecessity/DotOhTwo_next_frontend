@@ -15,6 +15,6 @@ type Story = StoryObj<typeof meta>;
 
 export const RatingOne: Story = {
     args: {
-        stars: 5,
+        score: 5,
     },
 };

@@ -3,7 +3,7 @@ import Stack from "../Stack/Stack";
 import { FaStar } from "react-icons/fa";
 
 interface RatingProps {
-    stars: number;
+    score: number;
 }
 
 /**
@@ -11,9 +11,9 @@ interface RatingProps {
  * @param param0
  * @returns
  */
-export const Rating = ({ stars }: RatingProps) => (
+export const Rating = ({ score }: RatingProps) => (
     <Stack inline direction="row" spacing={1}>
-        {new Array(stars).fill(null).map((_, index) => (
+        {new Array(score).fill(null).map((_, index) => (
             <FaStar
                 key={index}
                 className="text-yellow-500 stroke-current fill-current"
