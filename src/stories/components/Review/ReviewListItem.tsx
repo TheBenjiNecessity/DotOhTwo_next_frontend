@@ -32,32 +32,28 @@ export const Review = ({
     user,
     reviewable,
 }: ReviewProps) => (
-    <div className="p-4">
-        <Stack direction="row" spacing={2}>
-            <Stack.Expander>
-                <Stack spacing={2}>
-                    <Stack direction="row" spacing={2}>
-                        <Avatar imageUrl={user.avatarUrl} size="large" />
-                        <Stack>
-                            <Typography variant="h5">{user.name}</Typography>
-                            <Typography variant="h6">
-                                {user.username}
-                            </Typography>
-                        </Stack>
-                    </Stack>
-                    <Rating score={rating} />
-                    <Typography variant="h4">{name}</Typography>
-                    <Typography variant="body1">{description}</Typography>
-                </Stack>
-            </Stack.Expander>
-            <div className="min-w-[200px]">
+    <Stack direction="row" spacing={2}>
+        <Stack.Expander>
+            <Stack spacing={2}>
                 <Stack direction="row" spacing={2}>
-                    <Avatar imageUrl={reviewable.avatarUrl} size="large" />
+                    <Avatar imageUrl={user.avatarUrl} size="large" />
                     <Stack>
-                        <Typography variant="h5">{reviewable.name}</Typography>
+                        <Typography variant="h5">{user.name}</Typography>
+                        <Typography variant="h6">{user.username}</Typography>
                     </Stack>
                 </Stack>
-            </div>
-        </Stack>
-    </div>
+                <Rating score={rating} />
+                <Typography variant="h4">{name}</Typography>
+                <Typography variant="body1">{description}</Typography>
+            </Stack>
+        </Stack.Expander>
+        <div className="min-w-[200px]">
+            <Stack direction="row" spacing={2}>
+                <Avatar imageUrl={reviewable.avatarUrl} size="large" />
+                <Stack>
+                    <Typography variant="h5">{reviewable.name}</Typography>
+                </Stack>
+            </Stack>
+        </div>
+    </Stack>
 );
