@@ -4,62 +4,59 @@ import { Avatar } from "../Avatar/Avatar";
 import { Typography } from "../Typography/Typography";
 import { Rating } from "../Rating/Rating";
 
-type ReviewContent = {
+type User = {
+    username: string;
+    name: string;
     avatarUrl?: string;
-    reviewableAvatarUrl?: string;
 };
 
-type Review = {
+type Reviewable = {
     name: string;
-    description: string;
-    username: string;
-    rating: number;
-    date: Date;
-    content: ReviewContent;
+    avatarUrl?: string;
 };
 
 interface ReviewProps {
-    review: Review;
+    name: string;
+    description: string;
+    rating: number;
+    date: Date;
+    user: User;
+    reviewable: Reviewable;
 }
 
-/**
- * A small
- * @param param0
- * @returns
- */
-export const Review = ({ review }: ReviewProps) => (
+export const Review = ({
+    name,
+    description,
+    rating,
+    date,
+    user,
+    reviewable,
+}: ReviewProps) => (
     <div className="p-4">
         <Stack direction="row" spacing={2}>
             <Stack.Expander>
                 <Stack spacing={2}>
                     <Stack direction="row" spacing={2}>
-                        <div>
-                            <Avatar
-                                imageUrl={review?.content?.avatarUrl}
-                                size="large"
-                            />
-                        </div>
+                        <Avatar imageUrl={user.avatarUrl} size="large" />
                         <Stack>
-                            <Typography variant="h4">
-                                {review?.username}
-                            </Typography>
-                            <Typography variant="h4">
-                                {review?.username}
+                            <Typography variant="h5">{user.name}</Typography>
+                            <Typography variant="h6">
+                                {user.username}
                             </Typography>
                         </Stack>
                     </Stack>
-                    <Rating score={review?.rating} />
-                    <Typography variant="h4">{review?.name}</Typography>
-                    <Typography variant="body1">
-                        {review?.description}
-                    </Typography>
+                    <Rating score={rating} />
+                    <Typography variant="h4">{name}</Typography>
+                    <Typography variant="body1">{description}</Typography>
                 </Stack>
             </Stack.Expander>
             <div className="min-w-[200px]">
-                <Avatar
-                    imageUrl={review?.content?.reviewableAvatarUrl}
-                    size="large"
-                />
+                <Stack direction="row" spacing={2}>
+                    <Avatar imageUrl={reviewable.avatarUrl} size="large" />
+                    <Stack>
+                        <Typography variant="h5">{reviewable.name}</Typography>
+                    </Stack>
+                </Stack>
             </div>
         </Stack>
     </div>

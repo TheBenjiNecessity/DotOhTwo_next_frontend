@@ -15,9 +15,8 @@ type Story = StoryObj<typeof meta>;
 
 export const ReviewOne: Story = {
     args: {
-        review: {
-            name: "Ut enim ad minim veniam",
-            description: `
+        name: "Ut enim ad minim veniam",
+        description: `
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                 sed do eiusmod tempor incididunt ut labore et dolore magna
                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -27,13 +26,16 @@ export const ReviewOne: Story = {
                 occaecat cupidatat non proident, sunt in culpa qui officia
                 deserunt mollit anim id est laborum.
             `,
+        rating: 5,
+        date: new Date(),
+        user: {
             username: "username",
-            rating: 5,
-            date: new Date(),
-            content: {
-                avatarUrl: undefined,
-                reviewableAvatarUrl: undefined,
-            },
+            name: "John Doe",
+            avatarUrl: undefined,
+        },
+        reviewable: {
+            name: "Coca Cola",
+            avatarUrl: undefined,
         },
     },
 };
