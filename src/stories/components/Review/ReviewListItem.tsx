@@ -4,6 +4,7 @@ import { Avatar } from "../Avatar/Avatar";
 import { Typography } from "../Typography/Typography";
 import { Rating } from "../Rating/Rating";
 import { DateLabel } from "../DateLabel/DateLabel";
+import Grid from "../Grid/Grid";
 
 type User = {
     username: string;
@@ -33,8 +34,8 @@ export const Review = ({
     user,
     reviewable,
 }: ReviewProps) => (
-    <Stack direction="row" spacing={2}>
-        <Stack.Expander>
+    <Grid spacing={1}>
+        <Grid.Item xs={9}>
             <Stack spacing={2}>
                 <Stack direction="row" spacing={2}>
                     <Avatar imageUrl={user.avatarUrl} size="large" />
@@ -48,14 +49,14 @@ export const Review = ({
                 <Typography variant="h4">{name}</Typography>
                 <Typography variant="body1">{description}</Typography>
             </Stack>
-        </Stack.Expander>
-        <div className="min-w-[200px]">
+        </Grid.Item>
+        <Grid.Item xs={3}>
             <Stack direction="row" spacing={2}>
                 <Avatar imageUrl={reviewable.avatarUrl} size="large" />
                 <Stack>
                     <Typography variant="h5">{reviewable.name}</Typography>
                 </Stack>
             </Stack>
-        </div>
-    </Stack>
+        </Grid.Item>
+    </Grid>
 );
