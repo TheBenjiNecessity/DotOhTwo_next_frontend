@@ -3,6 +3,7 @@ import Stack from "../Stack/Stack";
 import { Avatar } from "../Avatar/Avatar";
 import { Typography } from "../Typography/Typography";
 import { Rating } from "../Rating/Rating";
+import { DateLabel } from "../DateLabel/DateLabel";
 
 type User = {
     username: string;
@@ -43,6 +44,7 @@ export const Review = ({
                     </Stack>
                 </Stack>
                 <Rating score={rating} />
+                <DateLabel date={date} />
                 <Typography variant="h4">{name}</Typography>
                 <Typography variant="body1">{description}</Typography>
             </Stack>
