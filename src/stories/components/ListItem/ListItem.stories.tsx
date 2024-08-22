@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { ListItem } from "./ListItem";
-import { ReviewableListItem } from "../Reviewable/ReviewableListItem";
+import { ReviewableListItem } from "../../composites/Reviewable/ReviewableListItem";
 
 const meta = {
     title: "Example/ListItem",

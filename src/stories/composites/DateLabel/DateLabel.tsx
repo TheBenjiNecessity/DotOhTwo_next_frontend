@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import { Typography } from "../Typography/Typography";
+import { Typography } from "../../components/Typography/Typography";
 import { DateTime } from "luxon";
 
 interface DateLabelProps

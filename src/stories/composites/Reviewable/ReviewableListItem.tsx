@@ -1,6 +1,6 @@
 import { Reviewable } from "@/models/reviewable.model";
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
-import { ListItem } from "../ListItem/ListItem";
+import { ListItem } from "../../components/ListItem/ListItem";
 
 interface ReviewableListItemProps {
     compact?: boolean;

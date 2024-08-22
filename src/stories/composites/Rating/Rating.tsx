@@ -1,5 +1,5 @@
 import React from "react";
-import Stack from "../Stack/Stack";
+import Stack from "../../components/Stack/Stack";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 
 const MAX_SCORE = 5;

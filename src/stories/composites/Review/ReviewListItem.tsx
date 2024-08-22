@@ -1,10 +1,10 @@
 import React from "react";
-import Stack from "../Stack/Stack";
-import { Avatar } from "../Avatar/Avatar";
-import { Typography } from "../Typography/Typography";
+import Stack from "../../components/Stack/Stack";
+import { Avatar } from "../../components/Avatar/Avatar";
+import { Typography } from "../../components/Typography/Typography";
 import { Rating } from "../Rating/Rating";
 import { DateLabel } from "../DateLabel/DateLabel";
-import Grid from "../Grid/Grid";
+import Grid from "../../components/Grid/Grid";
 
 type User = {
     username: string;
