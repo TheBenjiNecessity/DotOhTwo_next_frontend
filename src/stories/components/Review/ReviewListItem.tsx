@@ -35,22 +35,24 @@ export const Review = ({
     reviewable,
 }: ReviewProps) => (
     <Grid spacing={1}>
-        <Grid.Item xs={9}>
+        <Grid.Item xs={8}>
             <Stack spacing={2}>
                 <Stack direction="row" spacing={2}>
                     <Avatar imageUrl={user.avatarUrl} size="large" />
                     <Stack>
-                        <Typography variant="h5">{user.name}</Typography>
-                        <Typography variant="h6">{user.username}</Typography>
+                        <Typography variant="subtitle1">{user.name}</Typography>
+                        <Typography variant="subtitle2">
+                            {user.username}
+                        </Typography>
                     </Stack>
                 </Stack>
                 <Rating score={rating} />
                 <DateLabel date={date} />
-                <Typography variant="h4">{name}</Typography>
+                <Typography variant="h6">{name}</Typography>
                 <Typography variant="body1">{description}</Typography>
             </Stack>
         </Grid.Item>
-        <Grid.Item xs={3}>
+        <Grid.Item xs={4}>
             <Stack direction="row" spacing={2}>
                 <Avatar imageUrl={reviewable.avatarUrl} size="large" />
                 <Stack>

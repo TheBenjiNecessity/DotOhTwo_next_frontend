@@ -6,7 +6,7 @@ const meta = {
     component: Review,
     tags: ["autodocs"],
     parameters: {
-        layout: "fullscreen",
+        layout: "centered",
     },
 } satisfies Meta<typeof Review>;
 
