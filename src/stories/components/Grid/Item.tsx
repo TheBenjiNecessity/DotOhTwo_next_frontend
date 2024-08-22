@@ -32,6 +32,7 @@ const Item = ({
 
     const classes = [
         "inline-block",
+        "grid-item",
         xsWidthClass,
         smWidthClass,
         mdWidthClass,
