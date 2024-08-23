@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ReviewableListItem } from "./ReviewableListItem";
 
 const meta = {
-    title: "Example/ReviewableListItem",
+    title: "Composites/ReviewableListItem",
     component: ReviewableListItem,
     tags: ["autodocs"],
     parameters: {
