@@ -56,7 +56,9 @@ export const Review = ({
             <Stack direction="row" spacing={2}>
                 <Avatar imageUrl={reviewable.avatarUrl} size="large" />
                 <Stack>
-                    <Typography variant="h5">{reviewable.name}</Typography>
+                    <Typography variant="subtitle1">
+                        {reviewable.name}
+                    </Typography>
                 </Stack>
             </Stack>
         </Grid.Item>
