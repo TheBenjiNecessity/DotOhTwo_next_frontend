@@ -15,16 +15,9 @@ type Story = StoryObj<typeof meta>;
 
 export const ReviewableListItemOne: Story = {
     args: {
-        locale: "en",
-        compact: true,
-        reviewable: {
-            id: 123456,
-            type: "beverage",
-            title: "not used",
-            description: "not used",
-            content: null,
-            info: { title: { en: "reviewable title" } },
-            statistics: null,
-        },
+        name: "Coca Cola",
+        description: "Coca Cola is a carbonated soft drink.",
+        rating: 4,
+        avatarUrl: undefined,
     },
 };

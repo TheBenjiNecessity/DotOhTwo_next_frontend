@@ -15,20 +15,5 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const ListItemOne: Story = {
-    render: (args) => (
-        <ListItem {...args}>
-            <ReviewableListItem
-                locale="en"
-                reviewable={{
-                    id: 123456,
-                    type: "beverage",
-                    title: "not used",
-                    description: "not used",
-                    content: null,
-                    info: { title: { en: "reviewable title" } },
-                    statistics: null,
-                }}
-            />
-        </ListItem>
-    ),
+    render: (args) => <ListItem {...args}></ListItem>,
 };
