@@ -2,7 +2,6 @@ import React from "react";
 import Stack from "../../components/Stack/Stack";
 import { Avatar } from "../../components/Avatar/Avatar";
 import { Typography } from "../../components/Typography/Typography";
-import { Rating } from "../Rating/Rating";
 
 interface UserListItemProps {
     name?: string;
