@@ -8,7 +8,7 @@ export interface GridProps
 }
 
 const Grid = ({ spacing = 0, children }: GridProps) => {
-    const spacingClass = ["grid-container", `spacing-${spacing}`];
+    const spacingClass = ["w-full", "grid-container", `spacing-${spacing}`];
 
     return <div className={spacingClass.join(" ")}>{children}</div>;
 };
