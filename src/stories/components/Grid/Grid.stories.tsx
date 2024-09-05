@@ -18,9 +18,21 @@ type Story = StoryObj<typeof meta>;
 export const ExtraSmall: Story = {
     render: (args) => (
         <Grid {...args}>
-            <Grid.Item xs={1}>xs-1</Grid.Item>
-            <Grid.Item xs={2}>xs-2</Grid.Item>
-            <Grid.Item xs={9}>xs-9</Grid.Item>
+            <Grid.Item xs={1}>
+                <div className="border border-black w-full text-center">
+                    xs-1
+                </div>
+            </Grid.Item>
+            <Grid.Item xs={2}>
+                <div className="border border-black w-full text-center">
+                    xs-2
+                </div>
+            </Grid.Item>
+            <Grid.Item xs={9}>
+                <div className="border border-black w-full text-center">
+                    xs-9
+                </div>
+            </Grid.Item>
         </Grid>
     ),
 };
