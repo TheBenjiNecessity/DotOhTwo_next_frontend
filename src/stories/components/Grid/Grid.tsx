@@ -1,5 +1,6 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import Item from "./Item";
+import "../../../app/globals.css";
 import "./grid.css";
 
 export interface GridProps

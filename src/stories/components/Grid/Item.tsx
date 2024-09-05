@@ -6,6 +6,7 @@ import {
     XL_WIDTH_CLASSES,
     XS_WIDTH_CLASSES,
 } from "./item.constants";
+import "../../../app/globals.css";
 
 export interface ItemProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
