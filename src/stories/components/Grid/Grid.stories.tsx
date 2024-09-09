@@ -6,7 +6,7 @@ const meta = {
     title: "Example/Grid",
     component: Grid,
     parameters: {
-        layout: "fullscreen",
+        layout: "padded",
     },
     tags: ["autodocs"],
     argTypes: {},
@@ -17,23 +17,25 @@ type Story = StoryObj<typeof meta>;
 
 export const ExtraSmall: Story = {
     render: (args) => (
-        <Grid {...args}>
-            <Grid.Item xs={1}>
-                <div className="border border-black w-full text-center">
-                    xs-1
-                </div>
-            </Grid.Item>
-            <Grid.Item xs={2}>
-                <div className="border border-black w-full text-center">
-                    xs-2
-                </div>
-            </Grid.Item>
-            <Grid.Item xs={9}>
-                <div className="border border-black w-full text-center">
-                    xs-9
-                </div>
-            </Grid.Item>
-        </Grid>
+        <div className="border">
+            <Grid {...args}>
+                <Grid.Item xs={1}>
+                    <div className="border border-black w-full text-center">
+                        xs-1
+                    </div>
+                </Grid.Item>
+                <Grid.Item xs={2}>
+                    <div className="border border-black w-full text-center">
+                        xs-2
+                    </div>
+                </Grid.Item>
+                <Grid.Item xs={9}>
+                    <div className="border border-black w-full text-center">
+                        xs-9
+                    </div>
+                </Grid.Item>
+            </Grid>
+        </div>
     ),
 };
 
@@ -60,5 +62,38 @@ export const Combined: Story = {
                 <div className="border border-black w-full text-center">3</div>
             </Grid.Item>
         </Grid>
+    ),
+};
+
+export const Nested: Story = {
+    render: (args) => (
+        <div className="border border-red-400">
+            <Grid {...args}>
+                <Grid.Item xs={6}>
+                    <Grid {...args}>
+                        <Grid.Item xs={4}>
+                            <div className="border border-black w-full text-center">
+                                1
+                            </div>
+                        </Grid.Item>
+                        <Grid.Item xs={4}>
+                            <div className="border border-black w-full text-center">
+                                2
+                            </div>
+                        </Grid.Item>
+                        <Grid.Item xs={4}>
+                            <div className="border border-black w-full text-center">
+                                3
+                            </div>
+                        </Grid.Item>
+                    </Grid>
+                </Grid.Item>
+                <Grid.Item xs={6}>
+                    <div className="border border-black w-full text-center">
+                        2
+                    </div>
+                </Grid.Item>
+            </Grid>
+        </div>
     ),
 };

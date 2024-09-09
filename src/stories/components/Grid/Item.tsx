@@ -1,10 +1,10 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import {
-    LG_WIDTH_CLASSES,
-    MD_WIDTH_CLASSES,
-    SM_WIDTH_CLASSES,
-    XL_WIDTH_CLASSES,
-    XS_WIDTH_CLASSES,
+    LG_SPANS,
+    MD_SPANS,
+    SM_SPANS,
+    XL_SPANS,
+    XS_SPANS,
 } from "./item.constants";
 import "../../../app/globals.css";
 
@@ -25,20 +25,18 @@ const Item = ({
     xl = 0,
     children,
 }: ItemProps) => {
-    const xsWidthClass = xs ? XS_WIDTH_CLASSES[xs] : null;
-    const smWidthClass = sm ? SM_WIDTH_CLASSES[sm] : null;
-    const mdWidthClass = md ? MD_WIDTH_CLASSES[md] : null;
-    const lgWidthClass = lg ? LG_WIDTH_CLASSES[lg] : null;
-    const xlWidthClass = xl ? XL_WIDTH_CLASSES[xl] : null;
+    const xsSpanClass = xs ? XS_SPANS[xs] : null;
+    const smSpanClass = sm ? SM_SPANS[sm] : null;
+    const mdSpanClass = md ? MD_SPANS[md] : null;
+    const lgSpanClass = lg ? LG_SPANS[lg] : null;
+    const xlSpanClass = xl ? XL_SPANS[xl] : null;
 
     const classes = [
-        "inline-block",
-        "grid-item",
-        xsWidthClass,
-        smWidthClass,
-        mdWidthClass,
-        lgWidthClass,
-        xlWidthClass,
+        xsSpanClass,
+        smSpanClass,
+        mdSpanClass,
+        lgSpanClass,
+        xlSpanClass,
     ]
         .filter((item) => item !== null)
         .join(" ");
