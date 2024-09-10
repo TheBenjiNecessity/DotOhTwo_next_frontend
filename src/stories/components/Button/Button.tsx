@@ -34,13 +34,13 @@ export const Button = ({
     children,
     ...props
 }: ButtonProps) => {
-    const { className: _, ...restProps } = props; // remove className
+    const { className, ...restProps } = props; // remove className
 
     const mode = primary ? "primary" : "secondary";
     const { color, backgroundColor, borderColor } = theme.button[mode][variant];
     const variantClassNames = [color, backgroundColor, borderColor].join(" ");
     const outlinedClass = variant === "outlined" ? "border" : "";
-    const className = [
+    const classNames = [
         "rounded",
         "py-1",
         "px-2",
@@ -49,10 +49,11 @@ export const Button = ({
         SIZE_CLASS[size],
         theme.button[mode][variant].hover,
         theme.button[mode][variant].active,
+        className,
     ].join(" ");
 
     return (
-        <button className={className} {...restProps}>
+        <button className={classNames} {...restProps}>
             <Typography variant="body1">{children}</Typography>
         </button>
     );
