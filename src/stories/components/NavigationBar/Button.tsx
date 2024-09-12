@@ -3,10 +3,19 @@ import "../../../app/globals.css";
 import theme from "../../theme";
 import { Typography } from "../Typography/Typography";
 
-const SIZE_CLASS = {
-    small: "text-sm",
-    medium: "text-base",
-    large: "text-lg",
+import { cn } from "../../lib/utils";
+
+const getSizeClass = (size: string): "body1" | "body2" | "h6" | undefined => {
+    switch (size) {
+        case "small":
+            return "body2";
+        case "medium":
+            return "body1";
+        case "large":
+            return "h6";
+        default:
+            return undefined;
+    }
 };
 
 interface ButtonProps
@@ -31,32 +40,27 @@ export const Button = ({
     primary = false,
     size = "medium",
     variant = "contained",
+    className,
     children,
-    ...props
+    ...restProps
 }: ButtonProps) => {
-    const { className: _, ...restProps } = props; // remove className
-
     const mode = primary ? "primary" : "secondary";
-    const { color, backgroundColor, borderColor } = theme.button[mode][variant];
-    const variantClassNames = [color, backgroundColor, borderColor].join(" ");
-    const outlinedClass = variant === "outlined" ? "border" : "";
-    const className = [
-        "rounded",
-        "h-8",
-        "py-1",
-        "px-2",
-        outlinedClass,
-        variantClassNames,
-        SIZE_CLASS[size],
-        theme.button[mode][variant].hover,
-        theme.button[mode][variant].active,
-    ].join(" ");
 
     return (
-        <button className={className} {...restProps}>
-            <Typography variant="body1" noWrap>
-                {children}
-            </Typography>
+        <button
+            className={cn(
+                "rounded py-1 px-2",
+                variant === "outlined" && "border",
+                theme.button[mode][variant].color,
+                theme.button[mode][variant].backgroundColor,
+                theme.button[mode][variant].borderColor,
+                theme.button[mode][variant].hover,
+                theme.button[mode][variant].active,
+                className
+            )}
+            {...restProps}
+        >
+            <Typography variant={getSizeClass(size)}>{children}</Typography>
         </button>
     );
 };

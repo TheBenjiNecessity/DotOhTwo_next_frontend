@@ -1,5 +1,6 @@
 import React, { DetailedHTMLProps, HTMLAttributes, ElementType } from "react";
 import theme from "../../theme";
+import { cn } from "../../lib/utils";
 
 const ALIGN_CLASS = {
     inherit: "",
@@ -53,19 +54,19 @@ export const Typography = ({
     children,
     ...props
 }: TypographyProps) => {
-    const classes = [theme.typography[variant], ALIGN_CLASS[align], className];
     const Component: ElementType = VARIANT_MAP[variant];
 
-    if (gutterBottom) {
-        classes.push("mb-2");
-    }
-
-    if (noWrap) {
-        classes.push("whitespace-nowrap");
-    }
-
     return (
-        <Component className={classes.join(" ")} {...props}>
+        <Component
+            className={cn(
+                theme.typography[variant],
+                ALIGN_CLASS[align],
+                gutterBottom && "mb-2",
+                noWrap && "whitespace-nowrap",
+                className
+            )}
+            {...props}
+        >
             {children}
         </Component>
     );

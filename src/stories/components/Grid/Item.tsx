@@ -7,6 +7,7 @@ import {
     XS_SPANS,
 } from "./item.constants";
 import "../../../app/globals.css";
+import { cn } from "../../lib/utils";
 
 export interface ItemProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
@@ -25,22 +26,19 @@ const Item = ({
     xl = 0,
     children,
 }: ItemProps) => {
-    const xsSpanClass = xs ? XS_SPANS[xs] : null;
-    const smSpanClass = sm ? SM_SPANS[sm] : null;
-    const mdSpanClass = md ? MD_SPANS[md] : null;
-    const lgSpanClass = lg ? LG_SPANS[lg] : null;
-    const xlSpanClass = xl ? XL_SPANS[xl] : null;
-
-    const classes = [
-        xsSpanClass,
-        smSpanClass,
-        mdSpanClass,
-        lgSpanClass,
-        xlSpanClass,
-    ]
-        .filter((item) => item !== null)
-        .join(" ");
-    return <div className={classes}>{children}</div>;
+    return (
+        <div
+            className={cn(
+                xs && XS_SPANS[xs],
+                sm && SM_SPANS[sm],
+                md && MD_SPANS[md],
+                lg && LG_SPANS[lg],
+                xl && XL_SPANS[xl]
+            )}
+        >
+            {children}
+        </div>
+    );
 };
 
 export default Item;

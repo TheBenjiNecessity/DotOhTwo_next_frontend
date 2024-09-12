@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import "../../../app/globals.css";
-import { Stack } from "../Stack/Stack";
+import Stack from "../Stack/Stack";
 import { Flexbox } from "../Flexbox/Flexbox";
 
 type User = {

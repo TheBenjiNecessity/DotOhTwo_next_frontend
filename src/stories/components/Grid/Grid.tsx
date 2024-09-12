@@ -2,6 +2,7 @@ import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import Item from "./Item";
 import "../../../app/globals.css";
 import { GAPS } from "./grid.constants";
+import { cn } from "../../lib/utils";
 
 export interface GridProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> {
@@ -9,9 +10,11 @@ export interface GridProps
 }
 
 const Grid = ({ spacing = 0, children }: GridProps) => {
-    const spacingClass = ["w-full", "grid", "grid-cols-12", GAPS[spacing]];
-
-    return <div className={spacingClass.join(" ")}>{children}</div>;
+    return (
+        <div className={cn("w-full", "grid", "grid-cols-12", GAPS[spacing])}>
+            {children}
+        </div>
+    );
 };
 
 Grid.Item = Item;

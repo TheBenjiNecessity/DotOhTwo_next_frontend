@@ -1,5 +1,6 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import "../../tailwind_imports.css";
+import { cn } from "../../lib/utils";
 
 const DIRECTION_CLASSES = {
     row: "flex-row",
@@ -65,35 +66,27 @@ export const Flexbox = ({
     className,
     children,
 }: FlexboxProps) => {
-    const justifyClass = JUSTIFY_CLASSES[justifyContent];
-    const alignClass = ALIGN_ITEMS_CLASSES[alignItems];
-    const directionClass = DIRECTION_CLASSES[direction];
-    const widthClass = fullWidth ? "w-full" : "";
-    const heightClass = fullHeight ? "h-full" : "";
-    let growClass = "";
-    let shrinkClass = "";
+    const isFlexGrow = typeof flexGrow !== "undefined" && flexGrow === 0;
+    const isFlexShrink = typeof flexShrink !== "undefined" && flexShrink === 0;
 
-    if (typeof flexGrow !== "undefined") {
-        growClass = flexGrow === 0 ? "grow-0" : "grow";
-    }
-
-    if (typeof flexShrink !== "undefined") {
-        shrinkClass = flexShrink === 0 ? "shrink-0" : "shrink";
-    }
-
-    const classes = [
-        inline ? "inline-flex" : "flex",
-        directionClass,
-        justifyClass,
-        alignClass,
-        widthClass,
-        heightClass,
-        growClass,
-        shrinkClass,
-        className,
-    ]
-        .join(" ")
-        .trim();
-
-    return <div className={classes}>{children}</div>;
+    return (
+        <div
+            className={cn(
+                JUSTIFY_CLASSES[justifyContent],
+                ALIGN_ITEMS_CLASSES[alignItems],
+                DIRECTION_CLASSES[direction],
+                inline && "inline-flex",
+                !inline && "flex",
+                fullWidth && "w-full",
+                fullHeight && "h-full",
+                isFlexGrow && "grow-0",
+                isFlexShrink && "shrink-0",
+                !isFlexGrow && "grow",
+                !isFlexShrink && "shrink",
+                className
+            )}
+        >
+            {children}
+        </div>
+    );
 };

@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import Image from "next/image";
 import Github from "../../assets/github-white.svg";
+import { cn } from "../../lib/utils";
 
 const SIGN_IN_BUTTON_STYLES: Record<string, string> = {
     github: "bg-black text-white",
@@ -38,10 +39,14 @@ export const SocialLoginButton = ({
     providerId,
     ...restProps
 }: SSOButtonProps) => {
-    const className = `${SIGN_IN_BUTTON_STYLES[providerId]} w-full rounded-md px-3 py-3`;
-
     return (
-        <button className={className} {...restProps}>
+        <button
+            className={cn(
+                "w-full rounded-md px-3 py-3",
+                SIGN_IN_BUTTON_STYLES[providerId]
+            )}
+            {...restProps}
+        >
             <div className="flex flex-row items-center justify-start text-white">
                 {SIGN_IN_BUTTON_ICON[providerId] && (
                     <Image

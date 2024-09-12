@@ -1,18 +1,19 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
+import { cn } from "../../lib/utils";
 
-/**
- * A small
- * @param param0
- * @returns
- */
 export const ListItem = ({
     children,
     onClick,
 }: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) => {
-    const pointerClass = onClick ? "cursor-pointer" : "cursor-default";
-
     return (
-        <div onClick={onClick} className={`w-full px-2 py-1 ${pointerClass}`}>
+        <div
+            onClick={onClick}
+            className={cn(
+                "w-full px-2 py-1",
+                onClick && "cursor-pointer",
+                !onClick && "cursor-default"
+            )}
+        >
             {children}
         </div>
     );
