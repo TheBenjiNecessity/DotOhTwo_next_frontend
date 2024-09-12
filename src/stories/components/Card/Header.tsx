@@ -1,5 +1,6 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from "react";
 import "../../../app/globals.css";
+import { cn } from "../../lib/utils";
 
 interface HeaderProps
     extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
@@ -8,11 +9,9 @@ interface HeaderProps
 }
 
 export const Header = ({ centered = false, children }: HeaderProps) => {
-    let className = "mb-2 w-full";
-
-    if (centered) {
-        className += " text-center";
-    }
-
-    return <div className={className}>{children}</div>;
+    return (
+        <div className={cn("mb-2 w-full", centered && "text-center")}>
+            {children}
+        </div>
+    );
 };

@@ -4,6 +4,7 @@ import { Header } from "./Header";
 import { Body } from "./Body";
 import { Footer } from "./Footer";
 import { Actions } from "./Actions";
+import { cn } from "../../lib/utils";
 
 export enum CARD_WIDTH {
     FULL = "full",
@@ -23,31 +24,24 @@ const Card = ({
     className = "",
     children,
 }: CardProps) => {
-    const classes = [
-        "rounded",
-        "border",
-        "shadow",
-        "bg-white",
-        "p-6",
-        className,
-    ];
-
-    switch (width) {
-        case CARD_WIDTH.FULL:
-            classes.push("w-full");
-            break;
-        case CARD_WIDTH.LARGE:
-            classes.push("w-[1000px]");
-            break;
-        case CARD_WIDTH.MEDIUM:
-            classes.push("w-[500px]");
-            break;
-        case CARD_WIDTH.SMALL:
-            classes.push("w-[250px]");
-            break;
-    }
-
-    return <div className={classes.join(" ")}>{children}</div>;
+    return (
+        <div
+            className={cn(
+                "rounded",
+                "border",
+                "shadow",
+                "bg-white",
+                "p-6",
+                width === CARD_WIDTH.FULL && "w-full",
+                width === CARD_WIDTH.LARGE && "w-[1000px]",
+                width === CARD_WIDTH.MEDIUM && "w-[500px]",
+                width === CARD_WIDTH.SMALL && "w-[250px]",
+                className
+            )}
+        >
+            {children}
+        </div>
+    );
 };
 
 Card.Header = Header;
