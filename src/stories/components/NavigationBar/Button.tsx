@@ -54,7 +54,9 @@ export const Button = ({
 
     return (
         <button className={className} {...restProps}>
-            <Typography variant="body1">{children}</Typography>
+            <Typography variant="body1" noWrap>
+                {children}
+            </Typography>
         </button>
     );
 };
