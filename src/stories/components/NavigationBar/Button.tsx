@@ -60,7 +60,9 @@ export const Button = ({
             )}
             {...restProps}
         >
-            <Typography variant={getSizeClass(size)}>{children}</Typography>
+            <Typography variant={getSizeClass(size)} noWrap>
+                {children}
+            </Typography>
         </button>
     );
 };
